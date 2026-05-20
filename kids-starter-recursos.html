@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kids Starter – Instituto Cambridge 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --sky: #38BDF8;
+    --sun: #FBBF24;
+    --grass: #4ADE80;
+    --coral: #FB7185;
+    --purple: #A78BFA;
+    --dark: #1E293B;
+    --card-bg: #FFFFFF;
+    --page-bg: #F0F9FF;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: var(--page-bg);
+    color: var(--dark);
+    min-height: 100vh;
+  }
+
+  /* HEADER */
+  header {
+    background: linear-gradient(135deg, var(--sky) 0%, #6EE7F7 100%);
+    padding: 2rem 1.5rem 3rem;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+  header::before {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0; right: 0;
+    height: 50px;
+    background: var(--page-bg);
+    clip-path: ellipse(55% 100% at 50% 100%);
+  }
+  .badge {
+    display: inline-block;
+    background: var(--sun);
+    color: var(--dark);
+    font-weight: 800;
+    font-size: .8rem;
+    padding: .3rem .9rem;
+    border-radius: 99px;
+    margin-bottom: .8rem;
+    letter-spacing: .05em;
+    text-transform: uppercase;
+  }
+  header h1 {
+    font-family: 'Fredoka One', cursive;
+    font-size: clamp(2.2rem, 6vw, 3.5rem);
+    color: #fff;
+    text-shadow: 0 3px 10px rgba(0,0,0,.15);
+    line-height: 1.1;
+  }
+  header p {
+    color: rgba(255,255,255,.9);
+    margin-top: .6rem;
+    font-size: 1.05rem;
+    font-weight: 600;
+  }
+  .stars { font-size: 1.4rem; margin-top: .5rem; }
+
+  /* NAV TABS */
+  nav {
+    display: flex;
+    justify-content: center;
+    gap: .6rem;
+    flex-wrap: wrap;
+    padding: 1.5rem 1rem .5rem;
+  }
+  nav button {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 800;
+    font-size: .9rem;
+    padding: .55rem 1.3rem;
+    border: 3px solid transparent;
+    border-radius: 99px;
+    cursor: pointer;
+    transition: all .2s;
+    background: #fff;
+    color: var(--dark);
+    box-shadow: 0 2px 8px rgba(0,0,0,.08);
+  }
+  nav button.active { background: var(--sky); color: #fff; border-color: var(--sky); }
+  nav button:hover:not(.active) { border-color: var(--sky); }
+
+  /* SECTIONS */
+  section { display: none; padding: 1.5rem; max-width: 860px; margin: 0 auto 3rem; }
+  section.active { display: block; }
+
+  /* CARDS */
+  .card {
+    background: var(--card-bg);
+    border-radius: 20px;
+    padding: 1.8rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,.07);
+    margin-bottom: 1.5rem;
+  }
+  .card h2 {
+    font-family: 'Fredoka One', cursive;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    color: var(--dark);
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+  }
+
+  /* VOCABULARY */
+  .vocab-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: .8rem;
+    margin-top: 1rem;
+  }
+  .vocab-item {
+    background: linear-gradient(135deg, #EFF6FF, #DBEAFE);
+    border: 2px solid #BFDBFE;
+    border-radius: 14px;
+    padding: .8rem;
+    text-align: center;
+    transition: transform .2s;
+    cursor: default;
+  }
+  .vocab-item:hover { transform: translateY(-3px); }
+  .vocab-item .emoji { font-size: 2rem; display: block; margin-bottom: .3rem; }
+  .vocab-item .word { font-weight: 800; font-size: .95rem; color: #1D4ED8; }
+  .vocab-item .category { font-size: .75rem; color: #64748B; margin-top: .2rem; }
+
+  /* QUIZ */
+  .question-block {
+    background: #F8FAFC;
+    border-radius: 14px;
+    padding: 1.2rem;
+    margin-bottom: 1rem;
+    border: 2px solid #E2E8F0;
+  }
+  .question-block p { font-weight: 700; margin-bottom: .8rem; font-size: 1.05rem; }
+  .options { display: flex; flex-wrap: wrap; gap: .5rem; }
+  .opt {
+    font-family: 'Nunito', sans-serif;
+    font-weight: 700;
+    padding: .5rem 1.2rem;
+    border-radius: 99px;
+    border: 2.5px solid #CBD5E1;
+    background: #fff;
+    cursor: pointer;
+    font-size: .95rem;
+    transition: all .2s;
+  }
+  .opt:hover { border-color: var(--sky); background: #EFF6FF; }
+  .opt.correct { background: #DCFCE7; border-color: var(--grass); color: #166534; }
+  .opt.wrong { background: #FFE4E6; border-color: var(--coral); color: #9F1239; }
+  .opt.disabled { pointer-events: none; }
+  .feedback { margin-top: .6rem; font-weight: 700; font-size: .95rem; min-height: 1.2rem; }
+  .feedback.ok { color: #16A34A; }
+  .feedback.no { color: #DC2626; }
+
+  /* DRAG & DROP */
+  .drag-area { display: flex; flex-wrap: wrap; gap: .6rem; margin: 1rem 0; }
+  .draggable {
+    background: var(--purple);
+    color: #fff;
+    font-weight: 800;
+    padding: .45rem 1rem;
+    border-radius: 99px;
+    cursor: grab;
+    font-size: .9rem;
+    user-select: none;
+    transition: opacity .2s, transform .2s;
+  }
+  .draggable:active { cursor: grabbing; transform: scale(1.05); }
+  .draggable.used { opacity: .35; pointer-events: none; }
+  .drop-sentence {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: .4rem;
+    margin-bottom: .8rem;
+    font-size: 1rem;
+    font-weight: 600;
+  }
+  .drop-zone {
+    display: inline-block;
+    min-width: 90px;
+    height: 34px;
+    border-bottom: 3px solid var(--sky);
+    text-align: center;
+    line-height: 30px;
+    padding: 0 .4rem;
+    border-radius: 6px;
+    background: #F0F9FF;
+    color: #0369A1;
+    font-weight: 800;
+    font-size: .9rem;
+    transition: background .2s;
+  }
+  .drop-zone.over { background: #BAE6FD; }
+  .drop-zone.filled { background: #DCFCE7; border-color: var(--grass); color: #166534; }
+  .drop-zone.wrong-fill { background: #FFE4E6; border-color: var(--coral); color: #9F1239; }
+
+  /* SCORE */
+  .score-bar {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    background: #F1F5F9;
+    border-radius: 14px;
+    padding: 1rem 1.4rem;
+    margin-bottom: 1.2rem;
+  }
+  .score-bar span { font-weight: 800; font-size: 1.1rem; }
+  .progress-wrap { flex: 1; background: #E2E8F0; border-radius: 99px; height: 12px; overflow: hidden; }
+  .progress-fill { height: 100%; background: linear-gradient(90deg, var(--grass), var(--sky)); border-radius: 99px; transition: width .4s; }
+
+  /* BLOG */
+  .blog-tag {
+    display: inline-block;
+    background: var(--coral);
+    color: #fff;
+    font-weight: 800;
+    font-size: .75rem;
+    padding: .25rem .8rem;
+    border-radius: 99px;
+    text-transform: uppercase;
+    letter-spacing: .06em;
+    margin-bottom: .8rem;
+  }
+  .blog-body { line-height: 1.8; font-size: 1rem; color: #334155; }
+  .blog-body h3 { font-family:'Fredoka One',cursive; font-size:1.2rem; color:var(--dark); margin: 1.2rem 0 .4rem; }
+  .blog-body ul { padding-left: 1.4rem; margin: .5rem 0; }
+  .blog-body li { margin-bottom: .4rem; }
+  .tip-box {
+    background: linear-gradient(135deg,#FEF9C3,#FEF08A);
+    border-left: 5px solid var(--sun);
+    border-radius: 0 12px 12px 0;
+    padding: 1rem 1.2rem;
+    margin: 1rem 0;
+    font-weight: 600;
+  }
+
+  /* RESET BTN */
+  .btn {
+    font-family:'Nunito',sans-serif;
+    font-weight:800;
+    background: var(--sky);
+    color:#fff;
+    border:none;
+    border-radius:99px;
+    padding:.6rem 1.6rem;
+    cursor:pointer;
+    font-size:.95rem;
+    transition: background .2s, transform .15s;
+    margin-top: .8rem;
+  }
+  .btn:hover { background:#0EA5E9; transform: translateY(-1px); }
+  .btn.green { background: var(--grass); }
+  .btn.green:hover { background: #22C55E; }
+
+  @media(max-width:500px){
+    .vocab-grid { grid-template-columns: repeat(2,1fr); }
+    nav button { font-size:.8rem; padding:.45rem .9rem; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <div class="badge">Instituto Cambridge · 2026</div>
+  <h1>Kids Starter 🌟</h1>
+  <p>I Succeed in English 1 · Units 0–8</p>
+  <div class="stars">⭐⭐⭐⭐⭐</div>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('vocab',this)">📚 Vocabulary</button>
+  <button onclick="showTab('quiz',this)">🎯 Quiz</button>
+  <button onclick="showTab('drag',this)">🧩 Fill in</button>
+  <button onclick="showTab('blog',this)">📰 Tips</button>
+</nav>
+
+<!-- VOCABULARY -->
+<section id="vocab" class="active">
+  <div class="card">
+    <h2>📚 Key Vocabulary – Units 0 to 8</h2>
+    <p style="color:#64748B;font-size:.9rem;margin-bottom:.5rem;">Hover over each card to see it light up!</p>
+    <div class="vocab-grid" id="vocabGrid"></div>
+  </div>
+  <div class="card">
+    <h2>🔡 Grammar Focus</h2>
+    <div class="blog-body">
+      <h3>✅ To Be (am / is / are)</h3>
+      <ul>
+        <li>I <strong>am</strong> a student.</li>
+        <li>She <strong>is</strong> my teacher.</li>
+        <li>They <strong>are</strong> friends.</li>
+      </ul>
+      <h3>✅ Have Got</h3>
+      <ul>
+        <li>I <strong>have got</strong> a pencil.</li>
+        <li>He <strong>has got</strong> a dog.</li>
+      </ul>
+      <h3>✅ Colours & Numbers 1–20</h3>
+      <p>red · blue · green · yellow · orange · purple · pink · brown · black · white</p>
+      <h3>✅ Articles: a / an</h3>
+      <ul>
+        <li><strong>a</strong> book, <strong>a</strong> cat</li>
+        <li><strong>an</strong> apple, <strong>an</strong> egg</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- QUIZ -->
+<section id="quiz">
+  <div class="card">
+    <h2>🎯 Multiple Choice Quiz</h2>
+    <div class="score-bar">
+      <span>Score:</span>
+      <div class="progress-wrap"><div class="progress-fill" id="progressFill" style="width:0%"></div></div>
+      <span id="scoreText">0 / 8</span>
+    </div>
+    <div id="quizContainer"></div>
+    <button class="btn green" onclick="resetQuiz()">🔄 Try Again</button>
+  </div>
+</section>
+
+<!-- DRAG & DROP -->
+<section id="drag">
+  <div class="card">
+    <h2>🧩 Complete the Sentences</h2>
+    <p style="color:#64748B;font-size:.9rem;margin-bottom:1rem;">Drag each word to the correct blank.</p>
+    <div class="drag-area" id="dragWords"></div>
+    <div id="sentences"></div>
+    <button class="btn" onclick="checkDrag()">✅ Check</button>
+    <button class="btn" style="background:#94A3B8;margin-left:.5rem;" onclick="resetDrag()">🔄 Reset</button>
+    <div id="dragResult" style="margin-top:.8rem;font-weight:800;font-size:1.1rem;"></div>
+  </div>
+</section>
+
+<!-- BLOG -->
+<section id="blog">
+  <div class="card">
+    <div class="blog-tag">📰 Student Tips</div>
+    <h2>Starting English: Your First Steps!</h2>
+    <div class="blog-body">
+      <p>Welcome to <strong>Kids Starter</strong>! This year you'll discover how amazing English is. Here are some great tips to make your learning journey super fun:</p>
+      <h3>🎨 Learn with colours</h3>
+      <p>Use different coloured pens for different words. Write nouns in blue, verbs in red, and adjectives in green. Your brain will remember colours!</p>
+      <h3>🎵 Sing it!</h3>
+      <p>Many of the words in your book have songs. Try singing the alphabet, numbers, and colours every morning. Music helps your memory a lot.</p>
+      <div class="tip-box">💡 <strong>Did you know?</strong> Children who practise English for just 10 minutes every day learn twice as fast as those who only study in class!</div>
+      <h3>📖 Your Reader: <em>The Skateboarder</em></h3>
+      <p>This story is about a boy who loves skateboarding. As you read, try to find all the <strong>colours</strong> and <strong>numbers</strong> mentioned in the book — it's like a treasure hunt!</p>
+      <h3>🗣️ Practice at home</h3>
+      <ul>
+        <li>Say "Good morning!" to your family in English.</li>
+        <li>Count objects you see: "One chair, two chairs…"</li>
+        <li>Name colours when you draw or paint.</li>
+        <li>Ask "What's this?" and answer in English.</li>
+      </ul>
+      <h3>🌟 Remember</h3>
+      <p>Making mistakes is totally normal and <strong>part of learning</strong>. Every English speaker in the world made mistakes when they started. Be brave and speak!</p>
+    </div>
+  </div>
+</section>
+
+<script>
+// ---- VOCAB DATA ----
+const vocabData = [
+  {emoji:'🍎',word:'apple',category:'Food'},
+  {emoji:'🐱',word:'cat',category:'Animals'},
+  {emoji:'🐶',word:'dog',category:'Animals'},
+  {emoji:'✏️',word:'pencil',category:'School'},
+  {emoji:'📚',word:'book',category:'School'},
+  {emoji:'🔴',word:'red',category:'Colours'},
+  {emoji:'💛',word:'yellow',category:'Colours'},
+  {emoji:'💙',word:'blue',category:'Colours'},
+  {emoji:'1️⃣',word:'one',category:'Numbers'},
+  {emoji:'2️⃣',word:'two',category:'Numbers'},
+  {emoji:'🏠',word:'house',category:'Places'},
+  {emoji:'🏫',word:'school',category:'Places'},
+  {emoji:'👨‍👩‍👧',word:'family',category:'People'},
+  {emoji:'👩‍🏫',word:'teacher',category:'People'},
+  {emoji:'🎒',word:'bag',category:'School'},
+  {emoji:'🖍️',word:'crayon',category:'School'},
+];
+const vg = document.getElementById('vocabGrid');
+vocabData.forEach(v=>{
+  vg.innerHTML+=`<div class="vocab-item"><span class="emoji">${v.emoji}</span><div class="word">${v.word}</div><div class="category">${v.category}</div></div>`;
+});
+
+// ---- QUIZ DATA ----
+const questions = [
+  {q:'What colour is the sky? ☁️',opts:['red','blue','green','yellow'],ans:'blue'},
+  {q:'How do you say "gato" in English? 🐱',opts:['dog','bird','cat','fish'],ans:'cat'},
+  {q:'Choose the right sentence:',opts:['I am is happy','I am happy','I is happy','Am I happy?'],ans:'I am happy'},
+  {q:'Which is a school object? 🏫',opts:['apple','pencil','dog','house'],ans:'pencil'},
+  {q:'What number comes after TWO? 2️⃣',opts:['one','four','three','five'],ans:'three'},
+  {q:'Complete: She ___ my teacher.',opts:['am','is','are','be'],ans:'is'},
+  {q:'Which article is correct? ___ egg 🥚',opts:['a','an','the','–'],ans:'an'},
+  {q:'Complete: I have ___ a pencil.',opts:['get','got','gets','getting'],ans:'got'},
+];
+let score = 0;
+let answered = new Array(questions.length).fill(false);
+
+function buildQuiz(){
+  const c = document.getElementById('quizContainer');
+  c.innerHTML='';
+  questions.forEach((q,i)=>{
+    const div = document.createElement('div');
+    div.className='question-block';
+    div.innerHTML=`<p>${i+1}. ${q.q}</p><div class="options">${q.opts.map(o=>`<button class="opt" onclick="answer(this,'${o}','${q.ans}',${i})">${o}</button>`).join('')}</div><div class="feedback" id="fb${i}"></div>`;
+    c.appendChild(div);
+  });
+}
+function answer(btn,chosen,correct,idx){
+  if(answered[idx]) return;
+  answered[idx]=true;
+  const all=btn.parentElement.querySelectorAll('.opt');
+  all.forEach(b=>b.classList.add('disabled'));
+  if(chosen===correct){
+    btn.classList.add('correct');
+    score++;
+    document.getElementById('fb'+idx).textContent='✅ Great job!';
+    document.getElementById('fb'+idx).className='feedback ok';
+  } else {
+    btn.classList.add('wrong');
+    all.forEach(b=>{ if(b.textContent===correct) b.classList.add('correct'); });
+    document.getElementById('fb'+idx).textContent='❌ The answer is: '+correct;
+    document.getElementById('fb'+idx).className='feedback no';
+  }
+  updateScore();
+}
+function updateScore(){
+  const done=answered.filter(Boolean).length;
+  document.getElementById('scoreText').textContent=score+' / '+questions.length;
+  document.getElementById('progressFill').style.width=(score/questions.length*100)+'%';
+}
+function resetQuiz(){
+  score=0; answered=new Array(questions.length).fill(false);
+  buildQuiz(); updateScore();
+}
+buildQuiz();
+
+// ---- DRAG & DROP ----
+const dragSentences = [
+  {text:'I ___ a student.',blank:'am',before:'I ',after:' a student.'},
+  {text:'She ___ got a dog.',blank:'has',before:'She ',after:' got a dog.'},
+  {text:'They are ___ friends.',blank:'my',before:'They are ',after:' friends.'},
+  {text:'This is ___ apple.',blank:'an',before:'This is ',after:' apple.'},
+  {text:'I have ___ a book.',blank:'got',before:'I have ',after:' a book.'},
+];
+const allWords=['am','has','my','an','got'];
+
+function buildDrag(){
+  const dw=document.getElementById('dragWords');
+  dw.innerHTML=allWords.map(w=>`<div class="draggable" draggable="true" id="dw_${w}" ondragstart="dragStart(event,'${w}')">${w}</div>`).join('');
+  const sc=document.getElementById('sentences');
+  sc.innerHTML=dragSentences.map((s,i)=>`
+    <div class="drop-sentence">
+      <span>${s.before}</span>
+      <span class="drop-zone" id="dz_${i}" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="dropWord(event,${i},'${s.blank}')" data-answer="${s.blank}"></span>
+      <span>${s.after}</span>
+    </div>`).join('');
+}
+function dragStart(e,word){ e.dataTransfer.setData('text',word); }
+function dropWord(e,idx,correct){
+  e.preventDefault();
+  const word=e.dataTransfer.getData('text');
+  const zone=document.getElementById('dz_'+idx);
+  if(zone.textContent) return;
+  zone.textContent=word;
+  zone.classList.remove('over');
+  const src=document.getElementById('dw_'+word);
+  if(src) src.classList.add('used');
+}
+function checkDrag(){
+  let ok=0;
+  dragSentences.forEach((s,i)=>{
+    const z=document.getElementById('dz_'+i);
+    if(z.textContent===s.blank){ z.classList.add('filled'); z.classList.remove('wrong-fill'); ok++; }
+    else { z.classList.add('wrong-fill'); z.classList.remove('filled'); }
+  });
+  document.getElementById('dragResult').textContent=ok===dragSentences.length?'🎉 Perfect! All correct!':'You got '+ok+'/'+dragSentences.length+' correct. Try again!';
+  document.getElementById('dragResult').style.color=ok===dragSentences.length?'#16A34A':'#DC2626';
+}
+function resetDrag(){ buildDrag(); document.getElementById('dragResult').textContent=''; }
+buildDrag();
+
+// ---- TABS ----
+function showTab(id,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>
+</body>
+</html>
