@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teens 1 – Instituto Cambridge 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root{--main:#0EA5E9;--light:#F0F9FF;--dark:#0C4A6E;--green:#4ADE80;--red:#FB7185;--yellow:#FBBF24;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);}
+  header{background:linear-gradient(135deg,#0369A1,#0EA5E9,#38BDF8);padding:2.2rem 1.5rem 3.2rem;text-align:center;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;bottom:-1px;left:0;right:0;height:55px;background:var(--light);clip-path:ellipse(55% 100% at 50% 100%);}
+  .badge{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:.8rem;padding:.3rem 1rem;border-radius:99px;margin-bottom:.8rem;}
+  header h1{font-family:'Fredoka One',cursive;font-size:clamp(2rem,5vw,3.2rem);color:#fff;text-shadow:0 3px 12px rgba(0,0,0,.2);}
+  header p{color:rgba(255,255,255,.9);margin-top:.5rem;font-weight:700;font-size:.95rem;}
+  nav{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:1.5rem 1rem .5rem;}
+  nav button{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.5rem 1.2rem;border:3px solid transparent;border-radius:99px;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+  nav button.active{background:var(--main);color:#fff;border-color:var(--main);}
+  nav button:hover:not(.active){border-color:var(--main);}
+  section{display:none;padding:1.5rem;max-width:860px;margin:0 auto 3rem;}
+  section.active{display:block;}
+  .card{background:#fff;border-radius:20px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:1.4rem;}
+  .card h2{font-family:'Fredoka One',cursive;font-size:1.45rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  .vocab-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(135px,1fr));gap:.8rem;margin-top:1rem;}
+  .vocab-item{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:14px;padding:.85rem;text-align:center;transition:transform .2s;cursor:default;}
+  .vocab-item:hover{transform:translateY(-3px);}
+  .vocab-item .emoji{font-size:1.8rem;display:block;margin-bottom:.3rem;}
+  .vocab-item .word{font-weight:800;font-size:.9rem;color:#0369A1;}
+  .vocab-item .cat{font-size:.7rem;color:#64748B;margin-top:.15rem;}
+  .q-block{background:#F8FAFC;border-radius:14px;padding:1.1rem;margin-bottom:1rem;border:2px solid #E2E8F0;}
+  .q-block p{font-weight:700;margin-bottom:.8rem;font-size:.98rem;}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .opt{font-family:'Nunito',sans-serif;font-weight:700;padding:.45rem 1.1rem;border-radius:99px;border:2.5px solid #CBD5E1;background:#fff;cursor:pointer;font-size:.88rem;transition:all .2s;}
+  .opt:hover{border-color:var(--main);background:#F0F9FF;}
+  .opt.correct{background:#DCFCE7;border-color:var(--green);color:#166534;}
+  .opt.wrong{background:#FFE4E6;border-color:var(--red);color:#9F1239;}
+  .opt.disabled{pointer-events:none;}
+  .fb{margin-top:.5rem;font-weight:700;font-size:.85rem;min-height:.9rem;}
+  .fb.ok{color:#16A34A;} .fb.no{color:#DC2626;}
+  .drag-area{display:flex;flex-wrap:wrap;gap:.6rem;margin:1rem 0;}
+  .draggable{background:var(--main);color:#fff;font-weight:800;padding:.4rem .95rem;border-radius:99px;cursor:grab;font-size:.85rem;user-select:none;transition:opacity .2s,transform .2s;}
+  .draggable:active{cursor:grabbing;transform:scale(1.05);}
+  .draggable.used{opacity:.3;pointer-events:none;}
+  .drop-sentence{display:flex;align-items:center;flex-wrap:wrap;gap:.4rem;margin-bottom:.8rem;font-size:.95rem;font-weight:600;}
+  .drop-zone{display:inline-block;min-width:85px;height:30px;border-bottom:3px solid var(--main);text-align:center;line-height:26px;padding:0 .4rem;border-radius:6px;background:#F0F9FF;color:#0369A1;font-weight:800;font-size:.85rem;transition:background .2s;}
+  .drop-zone.over{background:#BAE6FD;}
+  .drop-zone.filled{background:#DCFCE7;border-color:var(--green);color:#166534;}
+  .drop-zone.wrong-fill{background:#FFE4E6;border-color:var(--red);color:#9F1239;}
+  .score-bar{display:flex;align-items:center;gap:1rem;background:#F1F5F9;border-radius:14px;padding:.9rem 1.2rem;margin-bottom:1.2rem;}
+  .score-bar span{font-weight:800;}
+  .pw{flex:1;background:#E2E8F0;border-radius:99px;height:10px;overflow:hidden;}
+  .pf{height:100%;background:linear-gradient(90deg,var(--green),var(--main));border-radius:99px;transition:width .4s;}
+  .blog-body{line-height:1.8;font-size:.95rem;color:#334155;}
+  .blog-body h3{font-family:'Fredoka One',cursive;font-size:1.15rem;color:var(--dark);margin:1.1rem 0 .4rem;}
+  .blog-body ul{padding-left:1.3rem;margin:.4rem 0;}
+  .blog-body li{margin-bottom:.35rem;}
+  .tip-box{background:linear-gradient(135deg,#FEF9C3,#FEF08A);border-left:5px solid var(--yellow);border-radius:0 12px 12px 0;padding:.9rem 1.1rem;margin:.8rem 0;font-weight:600;font-size:.92rem;}
+  .blog-tag{display:inline-block;background:var(--main);color:#fff;font-weight:800;font-size:.72rem;padding:.22rem .75rem;border-radius:99px;text-transform:uppercase;letter-spacing:.05em;margin-bottom:.7rem;}
+  .btn{font-family:'Nunito',sans-serif;font-weight:800;background:var(--main);color:#fff;border:none;border-radius:99px;padding:.55rem 1.5rem;cursor:pointer;font-size:.9rem;transition:background .2s;margin-top:.7rem;}
+  .btn:hover{background:#0284C7;}
+  .btn.sec{background:#94A3B8;margin-left:.5rem;}
+  .btn.sec:hover{background:#64748B;}
+  .gram-table{width:100%;border-collapse:collapse;margin-top:.8rem;font-size:.88rem;}
+  .gram-table th{background:#E0F2FE;padding:.6rem .8rem;text-align:left;font-weight:800;color:#0369A1;}
+  .gram-table td{padding:.6rem .8rem;border-bottom:1px solid #E2E8F0;}
+  .gram-table tr:last-child td{border-bottom:none;}
+  @media(max-width:500px){.vocab-grid{grid-template-columns:repeat(2,1fr);}nav button{font-size:.75rem;padding:.38rem .75rem;}}
+</style>
+</head>
+<body>
+<header>
+  <div class="badge">Instituto Cambridge · 2026</div>
+  <h1>Teens 1 🎒</h1>
+  <p>Prepare Level 1 (2nd Ed.) · Units 0–9, 11, 13–15, 19–20</p>
+</header>
+<nav>
+  <button class="active" onclick="T('vocab',this)">📚 Vocabulary</button>
+  <button onclick="T('grammar',this)">📝 Grammar</button>
+  <button onclick="T('quiz',this)">🎯 Quiz</button>
+  <button onclick="T('drag',this)">🧩 Fill in</button>
+  <button onclick="T('blog',this)">📰 Tips</button>
+</nav>
+
+<section id="vocab" class="active">
+  <div class="card">
+    <h2>📚 Key Vocabulary – Prepare Level 1</h2>
+    <p style="color:#64748B;font-size:.85rem;margin-bottom:.5rem;">Core topics: School life, Family, Daily routines, Free time, Food, Weather, Towns</p>
+    <div class="vocab-grid" id="vGrid"></div>
+  </div>
+</section>
+
+<section id="grammar">
+  <div class="card">
+    <h2>📝 Grammar Summary</h2>
+    <div class="blog-body">
+      <h3>✅ Present Simple & Continuous</h3>
+      <table class="gram-table">
+        <tr><th>Tense</th><th>Use</th><th>Example</th></tr>
+        <tr><td><strong>Present Simple</strong></td><td>Habits, facts, routines</td><td>She plays tennis on Saturdays.</td></tr>
+        <tr><td><strong>Present Continuous</strong></td><td>Right now / temporary</td><td>She is playing tennis now.</td></tr>
+      </table>
+      <h3>✅ Past Simple</h3>
+      <ul>
+        <li>Regular: walk → walked, study → studied</li>
+        <li>Irregular: go → went, see → saw, have → had</li>
+        <li>Negative: I <strong>didn't</strong> go. Question: <strong>Did</strong> you go?</li>
+      </ul>
+      <h3>✅ There is / There are · Some / Any</h3>
+      <ul>
+        <li>There is <strong>some</strong> milk. (+ sentences)</li>
+        <li>Is there <strong>any</strong> milk? / There isn't <strong>any</strong> milk. (? / − sentences)</li>
+      </ul>
+      <h3>✅ Comparative & Superlative</h3>
+      <ul>
+        <li>fast → faster → the fastest</li>
+        <li>beautiful → more beautiful → the most beautiful</li>
+        <li>good → better → the best &nbsp;|&nbsp; bad → worse → the worst</li>
+      </ul>
+      <h3>✅ Modal Verbs: can / must / should</h3>
+      <ul>
+        <li>I <strong>can</strong> swim. / She <strong>can't</strong> drive.</li>
+        <li>You <strong>must</strong> wear a uniform. / You <strong>mustn't</strong> run.</li>
+        <li>You <strong>should</strong> study more. / You <strong>shouldn't</strong> eat junk food.</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<section id="quiz">
+  <div class="card">
+    <h2>🎯 Quiz Time!</h2>
+    <div class="score-bar"><span>Score:</span><div class="pw"><div class="pf" id="pF" style="width:0%"></div></div><span id="sT">0 / 8</span></div>
+    <div id="qBox"></div>
+    <button class="btn" onclick="resetQ()">🔄 Try Again</button>
+  </div>
+</section>
+
+<section id="drag">
+  <div class="card">
+    <h2>🧩 Complete the Sentences</h2>
+    <p style="color:#64748B;font-size:.88rem;margin-bottom:1rem;">Drag each word to the correct blank.</p>
+    <div class="drag-area" id="dW"></div>
+    <div id="sB"></div>
+    <button class="btn" onclick="checkD()">✅ Check</button>
+    <button class="btn sec" onclick="resetD()">🔄 Reset</button>
+    <div id="dR" style="margin-top:.8rem;font-weight:800;font-size:1rem;"></div>
+  </div>
+</section>
+
+<section id="blog">
+  <div class="card">
+    <div class="blog-tag">📰 Student Tips</div>
+    <h2>Welcome to Teens 1! Your English Journey Starts Now 🚀</h2>
+    <div class="blog-body">
+      <p>Moving from Kids to Teens is a big step — and you're ready for it! In Teens 1 you'll use <strong>Prepare Level 1</strong>, a book full of real topics that teenagers care about: school, friends, free time, travel and more.</p>
+      <h3>📅 Daily English habits</h3>
+      <p>The best Teens 1 students practise a little every day. Here's a simple daily plan:</p>
+      <ul>
+        <li>☀️ Morning: say 5 sentences in English about your day ahead</li>
+        <li>📱 During the day: try to think in English for 5 minutes</li>
+        <li>🌙 Evening: write 3 sentences about what you did (Past Simple!)</li>
+      </ul>
+      <div class="tip-box">💡 <strong>Grammar shortcut:</strong> The hardest thing about Past Simple is irregular verbs. Make a list of 5 new irregular verbs each week and test yourself on Friday. By the end of the year you'll know 200+ irregular verbs!</div>
+      <h3>📖 Your Reader: <em>Newspaper Chase</em></h3>
+      <p>Your reader this year is a fast-paced crime story. As you read, notice how the author uses Past Simple to tell the story — that's exactly the grammar you're practising in class!</p>
+      <h3>🎯 Exam skills to build now</h3>
+      <ul>
+        <li><strong>Reading:</strong> Read the questions before the text — know what you're looking for</li>
+        <li><strong>Listening:</strong> Focus on key words, not every single word</li>
+        <li><strong>Writing:</strong> Always plan before you write — 2 minutes of planning saves 10 minutes of crossing out</li>
+        <li><strong>Speaking:</strong> If you don't know a word, describe it! "It's a thing you use for..." is a great strategy</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+const vocab=[
+  {e:'🏫',w:'timetable',c:'School'},{e:'📐',w:'subject',c:'School'},
+  {e:'👨‍👩‍👧',w:'relatives',c:'Family'},{e:'🛒',w:'shopping',c:'Town'},
+  {e:'⛅',w:'cloudy',c:'Weather'},{e:'🌡️',w:'temperature',c:'Weather'},
+  {e:'🎸',w:'hobby',c:'Free time'},{e:'🏃',w:'exercise',c:'Health'},
+  {e:'🍕',w:'fast food',c:'Food'},{e:'🥗',w:'healthy',c:'Food'},
+  {e:'✉️',w:'message',c:'Communication'},{e:'🗓️',w:'routine',c:'Daily life'},
+  {e:'🏙️',w:'city centre',c:'Town'},{e:'🎭',w:'theatre',c:'Entertainment'},
+  {e:'📚',w:'revision',c:'School'},{e:'🚌',w:'public transport',c:'Town'},
+];
+document.getElementById('vGrid').innerHTML=vocab.map(v=>`<div class="vocab-item"><span class="emoji">${v.e}</span><div class="word">${v.w}</div><div class="cat">${v.c}</div></div>`).join('');
+
+const qs=[
+  {q:'She ___ to school every day by bus.',opts:['go','goes','is going','went'],a:'goes'},
+  {q:'They ___ football right now. 🏃',opts:['play','are playing','played','plays'],a:'are playing'},
+  {q:'What is the Past Simple of "go"?',opts:['goed','gone','goes','went'],a:'went'},
+  {q:'___ there any milk in the fridge?',opts:['Is','Are','Have','Do'],a:'Is'},
+  {q:'London is ___ than my town. 🏙️',opts:['big','more big','bigger','biggest'],a:'bigger'},
+  {q:'You ___ use your phone in class. (prohibition)',opts:['should','can','must','mustn\'t'],a:'mustn\'t'},
+  {q:'I ___ swim since I was five. (ability)',opts:['should','must','can','have'],a:'can'},
+  {q:'Which is a correct Past Simple sentence?',opts:['She didn\'t went','She not go','She didn\'t go','She don\'t went'],a:'She didn\'t go'},
+];
+let sc=0,an=new Array(qs.length).fill(false);
+function buildQ(){document.getElementById('qBox').innerHTML=qs.map((q,i)=>`<div class="q-block"><p>${i+1}. ${q.q}</p><div class="opts">${q.opts.map(o=>`<button class="opt" onclick="aQ(this,\`${o.replace(/`/g,"'")}\`,\`${q.a.replace(/`/g,"'")}\`,${i})">${o}</button>`).join('')}</div><div class="fb" id="fb${i}"></div></div>`).join('');}
+function aQ(btn,c,a,i){if(an[i])return;an[i]=true;const all=btn.parentElement.querySelectorAll('.opt');all.forEach(b=>b.classList.add('disabled'));if(c===a){btn.classList.add('correct');sc++;document.getElementById('fb'+i).textContent='✅ Correct!';document.getElementById('fb'+i).className='fb ok';}else{btn.classList.add('wrong');all.forEach(b=>{if(b.textContent===a)b.classList.add('correct');});document.getElementById('fb'+i).textContent='❌ Answer: '+a;document.getElementById('fb'+i).className='fb no';}document.getElementById('sT').textContent=sc+'/'+qs.length;document.getElementById('pF').style.width=(sc/qs.length*100)+'%';}
+function resetQ(){sc=0;an=new Array(qs.length).fill(false);buildQ();document.getElementById('sT').textContent='0/'+qs.length;document.getElementById('pF').style.width='0%';}
+buildQ();
+
+const drags=[{b:'went',pre:'We ',post:' to the museum last Saturday.'},{b:'bigger',pre:'This city is ',post:' than my hometown.'},{b:'Are',pre:'',post:' there any problems?'},{b:"mustn't",pre:'You ',post:' talk during the exam.'},{b:'was playing',pre:'She ',post:' the guitar when I arrived.'}];
+const dws=['went','bigger','Are',"mustn't",'was playing'];
+function buildD(){document.getElementById('dW').innerHTML=dws.map((w,i)=>`<div class="draggable" draggable="true" id="dw${i}" ondragstart="ds(event,\`${w.replace(/`/g,"'")}\`,${i})">${w}</div>`).join('');document.getElementById('sB').innerHTML=drags.map((s,i)=>`<div class="drop-sentence">${s.pre?`<span>${s.pre}</span>`:''}<span class="drop-zone" id="dz${i}" ondragover="event.preventDefault();this.classList.add('over')" ondragleave="this.classList.remove('over')" ondrop="doDrop(event,${i},\`${s.b.replace(/`/g,"'")}\`)"></span><span>${s.post}</span></div>`).join('');}
+function ds(e,w,i){e.dataTransfer.setData('text',w);e.dataTransfer.setData('idx',i);}
+function doDrop(e,idx,correct){e.preventDefault();const w=e.dataTransfer.getData('text');const si=e.dataTransfer.getData('idx');const z=document.getElementById('dz'+idx);if(z.textContent)return;z.textContent=w;z.classList.remove('over');document.getElementById('dw'+si).classList.add('used');}
+function checkD(){let ok=0;drags.forEach((s,i)=>{const z=document.getElementById('dz'+i);if(z.textContent===s.b){z.classList.add('filled');z.classList.remove('wrong-fill');ok++;}else{z.classList.add('wrong-fill');z.classList.remove('filled');}});const r=document.getElementById('dR');r.textContent=ok===drags.length?'🎉 All correct!':'You got '+ok+'/'+drags.length+'. Try again!';r.style.color=ok===drags.length?'#16A34A':'#DC2626';}
+function resetD(){buildD();document.getElementById('dR').textContent='';}
+buildD();
+
+function T(id,btn){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+</script>
+</body>
+</html>

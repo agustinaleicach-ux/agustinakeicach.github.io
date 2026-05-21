@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Newspaper Chase – Teens 1 Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root{--main:#0EA5E9;--light:#F0F9FF;--dark:#0C4A6E;--green:#4ADE80;--red:#FB7185;--yellow:#FBBF24;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);}
+  header{background:linear-gradient(135deg,#0369A1,#0EA5E9,#38BDF8);padding:2rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;bottom:-1px;left:0;right:0;height:50px;background:var(--light);clip-path:ellipse(55% 100% at 50% 100%);}
+  .level-badge{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:.78rem;padding:.3rem 1rem;border-radius:99px;margin-bottom:.6rem;}
+  .book-emoji{font-size:3.5rem;display:block;margin-bottom:.5rem;}
+  header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,3rem);color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.2);}
+  header .sub{color:rgba(255,255,255,.9);font-weight:700;margin-top:.4rem;font-size:.95rem;}
+  nav{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:1.5rem 1rem .5rem;}
+  nav button{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.5rem 1.2rem;border:3px solid transparent;border-radius:99px;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+  nav button.active{background:var(--main);color:#fff;border-color:var(--main);}
+  nav button:hover:not(.active){border-color:var(--main);}
+  section{display:none;padding:1.5rem;max-width:820px;margin:0 auto 3rem;}
+  section.active{display:block;}
+  .card{background:#fff;border-radius:20px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:1.4rem;}
+  .card h2{font-family:'Fredoka One',cursive;font-size:1.45rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+  .story-fact{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:14px;padding:1rem;text-align:center;}
+  .story-fact .label{font-size:.75rem;font-weight:800;color:#0369A1;text-transform:uppercase;letter-spacing:.05em;}
+  .story-fact .value{font-size:.95rem;font-weight:700;margin-top:.3rem;}
+  .synopsis{background:linear-gradient(135deg,#FEF9C3,#FEF08A);border-left:5px solid var(--yellow);border-radius:0 14px 14px 0;padding:1.1rem 1.3rem;margin-top:1rem;font-size:.95rem;line-height:1.7;color:#44403C;font-weight:600;}
+  .characters{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:.8rem;margin-top:1rem;}
+  .char-card{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:14px;padding:.9rem;text-align:center;}
+  .char-card .char-emoji{font-size:2rem;display:block;margin-bottom:.3rem;}
+  .char-card .char-name{font-weight:800;font-size:.9rem;color:#0369A1;}
+  .char-card .char-desc{font-size:.73rem;color:#6B7280;margin-top:.25rem;line-height:1.4;}
+  .bv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.8rem;margin-top:1rem;}
+  .bv-item{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:14px;padding:.9rem;transition:transform .2s;cursor:default;}
+  .bv-item:hover{transform:translateY(-3px);}
+  .bv-word{font-weight:800;color:#0369A1;font-size:.92rem;}
+  .bv-def{font-size:.77rem;color:#475569;margin-top:.3rem;line-height:1.4;}
+  .q-block{background:#F8FAFC;border-radius:14px;padding:1.1rem;margin-bottom:1rem;border:2px solid #E2E8F0;}
+  .q-block p{font-weight:700;margin-bottom:.8rem;font-size:.95rem;}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .opt{font-family:'Nunito',sans-serif;font-weight:700;padding:.45rem 1.1rem;border-radius:99px;border:2.5px solid #CBD5E1;background:#fff;cursor:pointer;font-size:.85rem;transition:all .2s;}
+  .opt:hover{border-color:var(--main);background:var(--light);}
+  .opt.correct{background:#DCFCE7;border-color:var(--green);color:#166534;}
+  .opt.wrong{background:#FFE4E6;border-color:var(--red);color:#9F1239;}
+  .opt.disabled{pointer-events:none;}
+  .fb{margin-top:.45rem;font-weight:700;font-size:.85rem;min-height:.9rem;}
+  .fb.ok{color:#16A34A;} .fb.no{color:#DC2626;}
+  .score-bar{display:flex;align-items:center;gap:1rem;background:#F1F5F9;border-radius:14px;padding:.9rem 1.2rem;margin-bottom:1.2rem;}
+  .score-bar span{font-weight:800;}
+  .pw{flex:1;background:#E2E8F0;border-radius:99px;height:10px;overflow:hidden;}
+  .pf{height:100%;background:linear-gradient(90deg,var(--green),var(--main));border-radius:99px;transition:width .4s;}
+  .creative-prompt{background:linear-gradient(135deg,#FEF9C3,#FEF08A);border:2px solid #FCD34D;border-radius:14px;padding:1.2rem;margin-bottom:1rem;}
+  .creative-prompt h4{font-family:'Fredoka One',cursive;font-size:1.05rem;color:#92400E;margin-bottom:.5rem;}
+  .creative-prompt p{font-size:.9rem;color:#44403C;line-height:1.6;margin-bottom:.8rem;}
+  .writing-area{width:100%;min-height:90px;border:2px solid #BAE6FD;border-radius:12px;padding:.8rem;font-family:'Nunito',sans-serif;font-size:.88rem;resize:vertical;outline:none;transition:border-color .2s;color:#1E293B;}
+  .writing-area:focus{border-color:var(--main);}
+  .char-count{font-size:.74rem;color:#94A3B8;margin-top:.2rem;text-align:right;}
+  .tip-green{background:#ECFDF5;border-radius:12px;padding:1rem 1.2rem;margin-top:.5rem;border:2px solid #A7F3D0;font-size:.88rem;font-weight:600;color:#065F46;}
+  .story-map-item{border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.6rem;font-size:.9rem;font-weight:600;}
+  .btn{font-family:'Nunito',sans-serif;font-weight:800;background:var(--main);color:#fff;border:none;border-radius:99px;padding:.55rem 1.5rem;cursor:pointer;font-size:.9rem;transition:background .2s;margin-top:.8rem;}
+  @media(max-width:500px){.story-grid{grid-template-columns:1fr;}.bv-grid{grid-template-columns:repeat(2,1fr);}nav button{font-size:.75rem;padding:.38rem .75rem;}}
+</style>
+</head>
+<body>
+<header>
+  <span class="book-emoji">📰</span>
+  <div class="level-badge">Teens 1 · Instituto Cambridge 2026</div>
+  <h1>Newspaper Chase</h1>
+  <p class="sub">by John Escott · Easystarts (200 headwords)</p>
+</header>
+<nav>
+  <button class="active" onclick="S('about',this)">📖 About</button>
+  <button onclick="S('vocab',this)">📚 Vocabulary</button>
+  <button onclick="S('comprehension',this)">🔍 Comprehension</button>
+  <button onclick="S('creative',this)">✍️ Creative</button>
+</nav>
+
+<section id="about" class="active">
+  <div class="card">
+    <h2>📖 About the Book</h2>
+    <div class="story-grid">
+      <div class="story-fact"><div class="label">Author</div><div class="value">John Escott</div></div>
+      <div class="story-fact"><div class="label">Publisher</div><div class="value">Penguin Active Reading</div></div>
+      <div class="story-fact"><div class="label">Genre</div><div class="value">🕵️ Crime / Thriller</div></div>
+      <div class="story-fact"><div class="label">Setting</div><div class="value">🇬🇧 England</div></div>
+    </div>
+    <div class="synopsis">Harry Black is a thief. He steals a very expensive painting from an art gallery and hides it inside an old newspaper in his room. But then the recycling truck arrives — and Harry's newspaper disappears with it! Can Harry find his painting before the police find him? Meanwhile, his neighbour Janey spots a crucial clue...</div>
+  </div>
+  <div class="card">
+    <h2>👥 Characters</h2>
+    <div class="characters" id="chars"></div>
+  </div>
+  <div class="card">
+    <h2>🗺️ Story Map</h2>
+    <div id="storyMap"></div>
+  </div>
+</section>
+
+<section id="vocab">
+  <div class="card">
+    <h2>📚 Key Words from the Story</h2>
+    <p style="color:#475569;font-size:.85rem;margin-bottom:.5rem;">Learn these words — they all appear in the book!</p>
+    <div class="bv-grid" id="bvGrid"></div>
+  </div>
+</section>
+
+<section id="comprehension">
+  <div class="card">
+    <h2>🔍 Reading Comprehension</h2>
+    <p style="color:#475569;font-size:.85rem;margin-bottom:1rem;">How well do you know the story?</p>
+    <div class="score-bar"><span>Score:</span><div class="pw"><div class="pf" id="rcFill" style="width:0%"></div></div><span id="rcText">0 / 6</span></div>
+    <div id="rcBox"></div>
+    <button class="btn" onclick="resetRC()">🔄 Try Again</button>
+  </div>
+</section>
+
+<section id="creative">
+  <div class="card">
+    <h2>✍️ Creative Activities</h2>
+    <p style="color:#475569;font-size:.85rem;margin-bottom:1.2rem;">Write and express yourself in English! 🌟</p>
+    <div id="creativeBox"></div>
+    <div class="tip-green" id="tipBox"></div>
+  </div>
+</section>
+
+<script>
+const chars = [{"e": "\ud83e\uddb9", "n": "Harry Black", "d": "A clever thief who steals a famous painting worth a million dollars."}, {"e": "\ud83d\udc67", "n": "Janey", "d": "Harry's neighbour. She is observant and loves recycling."}, {"e": "\ud83d\uddbc\ufe0f", "n": "The Painting", "d": "A priceless work of art that starts all the trouble."}, {"e": "\u267b\ufe0f", "n": "The Recycling Truck", "d": "The unexpected villain of the story \u2014 it takes Harry's newspaper!"}];
+document.getElementById('chars').innerHTML = chars.map(c => `<div class="char-card"><span class="char-emoji">${c.e}</span><div class="char-name">${c.n}</div><div class="char-desc">${c.d}</div></div>`).join('');
+
+const storyMapData = [{"bg": "#F0F9FF", "col": "#0EA5E9", "phase": "Beginning", "text": "Harry breaks into the art gallery at night and cuts a famous painting from its frame. He hides it inside a rolled-up newspaper in his room."}, {"bg": "#FFFBEB", "col": "#FBBF24", "phase": "Middle", "text": "The recycling truck comes while Harry is out. When he returns, his newspaper \u2014 and the painting \u2014 are gone! Harry desperately searches for it."}, {"bg": "#ECFDF5", "col": "#4ADE80", "phase": "End", "text": "Janey notices a piece of glass in Harry's shoe \u2014 the same glass from the gallery. She realises he is the thief, calls the police, and Harry is caught. \ud83d\ude94"}];
+document.getElementById('storyMap').innerHTML = storyMapData.map(s => `<div class="story-map-item" style="background:${s.bg};border-left:4px solid ${s.col};"><strong>${s.phase}:</strong> ${s.text}</div>`).join('');
+
+const bv = [{"w": "thief", "d": "a person who steals things from others \ud83e\uddb9"}, {"w": "steal", "d": "to take something that belongs to someone else"}, {"w": "painting", "d": "a picture made with paint, often very valuable \ud83d\uddbc\ufe0f"}, {"w": "gallery", "d": "a place where art is displayed for people to see"}, {"w": "hide", "d": "to put something in a place where it cannot be found"}, {"w": "newspaper", "d": "printed pages with news, sold every day \ud83d\udcf0"}, {"w": "recycle", "d": "to process used materials so they can be used again \u267b\ufe0f"}, {"w": "valuable", "d": "worth a lot of money \ud83d\udcb0"}, {"w": "arrest", "d": "when the police take someone to the station because of a crime"}, {"w": "greedy", "d": "wanting more than you need, especially money"}, {"w": "evidence", "d": "information that helps prove something happened"}, {"w": "clue", "d": "a piece of information that helps solve a problem \ud83d\udd0d"}, {"w": "truck", "d": "a large vehicle for carrying heavy loads \ud83d\ude9b"}, {"w": "million", "d": "one thousand thousands = 1,000,000 \ud83d\udcb5"}];
+document.getElementById('bvGrid').innerHTML = bv.map(v => `<div class="bv-item"><div class="bv-word">${v.w}</div><div class="bv-def">${v.d}</div></div>`).join('');
+
+const rcqs = [{"q": "What does Harry steal from the art gallery?", "opts": ["A diamond necklace", "A famous painting", "A bag of money", "A golden statue"], "a": "A famous painting"}, {"q": "Where does Harry hide the stolen painting?", "opts": ["Under his bed", "In a suitcase", "Inside a newspaper", "Behind a painting"], "a": "Inside a newspaper"}, {"q": "What happens to Harry's newspaper?", "opts": ["The police take it", "He burns it", "The recycling truck takes it", "He sells it"], "a": "The recycling truck takes it"}, {"q": "Who notices the clue that catches Harry?", "opts": ["A police officer", "His wife", "His neighbour Janey", "A gallery guard"], "a": "His neighbour Janey"}, {"q": "What clue does Janey spot?", "opts": ["Harry's fingerprints", "A piece of glass in his shoe", "The rolled-up newspaper", "A stolen key"], "a": "A piece of glass in his shoe"}, {"q": "What is the main message of the story?", "opts": ["Crime always pays", "Recycling is important", "Thieves always make mistakes", "Art is priceless"], "a": "Thieves always make mistakes"}];
+let rScore=0, rAns=new Array(rcqs.length).fill(false);
+function buildRC(){document.getElementById('rcBox').innerHTML=rcqs.map((q,i)=>`<div class="q-block"><p>${i+1}. ${q.q}</p><div class="opts">${q.opts.map(o=>`<button class="opt" onclick="aRC(this,\`${o.replace(/`/g,"'")}\`,\`${q.a.replace(/`/g,"'")}\`,${i})">${o}</button>`).join('')}</div><div class="fb" id="fb${i}"></div></div>`).join('');}
+function aRC(btn,c,a,i){if(rAns[i])return;rAns[i]=true;const all=btn.parentElement.querySelectorAll('.opt');all.forEach(b=>b.classList.add('disabled'));if(c===a){btn.classList.add('correct');rScore++;document.getElementById('fb'+i).textContent='✅ Correct!';document.getElementById('fb'+i).className='fb ok';}else{btn.classList.add('wrong');all.forEach(b=>{if(b.textContent===a)b.classList.add('correct');});document.getElementById('fb'+i).textContent='❌ Answer: '+a;document.getElementById('fb'+i).className='fb no';}document.getElementById('rcText').textContent=rScore+' / '+rcqs.length;document.getElementById('rcFill').style.width=(rScore/rcqs.length*100)+'%';}
+function resetRC(){rScore=0;rAns=new Array(rcqs.length).fill(false);buildRC();document.getElementById('rcText').textContent='0 / '+rcqs.length;document.getElementById('rcFill').style.width='0%';}
+buildRC();
+
+const creativeData = [{"title": "\ud83d\uddde\ufe0f Activity 1 \u2013 Harry's Confession (Past Simple)", "desc": "Write Harry's confession to the police after he is caught. What did he do? Why? Use <strong>Past Simple</strong> throughout. Write 5\u20136 sentences.", "placeholder": "Dear officer, I am sorry. Last Tuesday I went to the gallery at midnight and I..."}, {"title": "\ud83d\udcf0 Activity 2 \u2013 Write the Newspaper Headline!", "desc": "You are a journalist. Write a short news article (6\u20137 sentences) about Harry's arrest. Use <strong>Past Simple</strong> and <strong>Past Passive</strong> (The painting was stolen by...). Include a headline!", "placeholder": "THIEF CAUGHT AFTER RECYCLING MIX-UP!\n\nA man was arrested yesterday after a stolen painting was found..."}, {"title": "\ud83c\udfad Activity 3 \u2013 Janey's Point of View", "desc": "Write Janey's diary entry for the day she spotted the clue. How did she feel? What did she do? Use <strong>Past Continuous</strong> (I was looking at...) and <strong>Past Simple</strong>. Write 5\u20136 sentences.", "placeholder": "Dear Diary, I was cleaning the hallway when I noticed something strange. Harry was walking..."}];
+document.getElementById('creativeBox').innerHTML = creativeData.map((c,i) => `<div class="creative-prompt"><h4>${c.title}</h4><p>${c.desc}</p><textarea class="writing-area" id="ca${i}" placeholder="${c.placeholder}" oninput="cc('ca${i}','cac${i}')"></textarea><div class="char-count" id="cac${i}">0 characters</div></div>`).join('');
+document.getElementById('tipBox').textContent = '';
+document.getElementById('tipBox').innerHTML = "\ud83d\udca1 <strong>Fun fact:</strong> The Penguin Active Reading series includes audio and interactive activities. If your school has the CD-ROM version of Newspaper Chase, try listening while you read \u2014 it helps with pronunciation and comprehension at the same time!";
+
+function cc(id,cid){document.getElementById(cid).textContent=document.getElementById(id).value.length+' characters';}
+function S(id,btn){document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));document.getElementById(id).classList.add('active');btn.classList.add('active');}
+</script>
+</body>
+</html>
