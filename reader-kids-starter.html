@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Skateboarder – Kids Starter Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root{--main:#38BDF8;--dark:#0C4A6E;--light:#F0F9FF;--yellow:#FBBF24;--green:#4ADE80;--red:#FB7185;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);}
+  header{background:linear-gradient(135deg,#0369A1,#0EA5E9,#38BDF8);padding:2rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;bottom:-1px;left:0;right:0;height:50px;background:var(--light);clip-path:ellipse(55% 100% at 50% 100%);}
+  .level-badge{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:.78rem;padding:.3rem 1rem;border-radius:99px;margin-bottom:.6rem;letter-spacing:.05em;}
+  .book-emoji{font-size:3.5rem;display:block;margin-bottom:.5rem;}
+  header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,3rem);color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.2);}
+  header .sub{color:rgba(255,255,255,.9);font-weight:700;margin-top:.4rem;font-size:.95rem;}
+  nav{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:1.5rem 1rem .5rem;}
+  nav button{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.5rem 1.2rem;border:3px solid transparent;border-radius:99px;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+  nav button.active{background:var(--main);color:#fff;border-color:var(--main);}
+  nav button:hover:not(.active){border-color:var(--main);}
+  section{display:none;padding:1.5rem;max-width:820px;margin:0 auto 3rem;}
+  section.active{display:block;}
+  .card{background:#fff;border-radius:20px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:1.4rem;}
+  .card h2{font-family:'Fredoka One',cursive;font-size:1.45rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  /* ABOUT */
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+  .story-fact{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #BAE6FD;border-radius:14px;padding:1rem;text-align:center;}
+  .story-fact .label{font-size:.75rem;font-weight:800;color:#0369A1;text-transform:uppercase;letter-spacing:.05em;}
+  .story-fact .value{font-size:.95rem;font-weight:700;margin-top:.3rem;color:var(--dark);}
+  .synopsis{background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border-left:5px solid var(--yellow);border-radius:0 14px 14px 0;padding:1.1rem 1.3rem;margin-top:1rem;font-size:.95rem;line-height:1.7;color:#44403C;font-weight:600;}
+  .characters{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem;margin-top:1rem;}
+  .char-card{background:#F8FAFC;border:2px solid #E2E8F0;border-radius:14px;padding:.9rem;text-align:center;}
+  .char-card .char-emoji{font-size:2rem;display:block;margin-bottom:.3rem;}
+  .char-card .char-name{font-weight:800;font-size:.92rem;color:var(--dark);}
+  .char-card .char-desc{font-size:.75rem;color:#64748B;margin-top:.2rem;line-height:1.4;}
+  /* VOCAB */
+  .bv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.8rem;margin-top:1rem;}
+  .bv-item{background:linear-gradient(135deg,#F0F9FF,#E0F2FE);border:2px solid #7DD3FC;border-radius:14px;padding:.9rem;transition:transform .2s;cursor:default;}
+  .bv-item:hover{transform:translateY(-3px);}
+  .bv-word{font-weight:800;color:#0369A1;font-size:.95rem;}
+  .bv-def{font-size:.78rem;color:#475569;margin-top:.3rem;line-height:1.4;}
+  /* COMPREHENSION */
+  .q-block{background:#F8FAFC;border-radius:14px;padding:1.1rem;margin-bottom:1rem;border:2px solid #E2E8F0;}
+  .q-block p{font-weight:700;margin-bottom:.8rem;font-size:.98rem;}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .opt{font-family:'Nunito',sans-serif;font-weight:700;padding:.45rem 1.1rem;border-radius:99px;border:2.5px solid #CBD5E1;background:#fff;cursor:pointer;font-size:.88rem;transition:all .2s;}
+  .opt:hover{border-color:var(--main);background:#F0F9FF;}
+  .opt.correct{background:#DCFCE7;border-color:var(--green);color:#166534;}
+  .opt.wrong{background:#FFE4E6;border-color:var(--red);color:#9F1239;}
+  .opt.disabled{pointer-events:none;}
+  .fb{margin-top:.5rem;font-weight:700;font-size:.88rem;min-height:1rem;}
+  .fb.ok{color:#16A34A;} .fb.no{color:#DC2626;}
+  .score-bar{display:flex;align-items:center;gap:1rem;background:#F1F5F9;border-radius:14px;padding:.9rem 1.2rem;margin-bottom:1.2rem;}
+  .score-bar span{font-weight:800;}
+  .progress-wrap{flex:1;background:#E2E8F0;border-radius:99px;height:10px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--main));border-radius:99px;transition:width .4s;}
+  /* CREATIVE */
+  .creative-prompt{background:linear-gradient(135deg,#FFF7ED,#FEF3C7);border:2px solid #FCD34D;border-radius:14px;padding:1.2rem;margin-bottom:1rem;}
+  .creative-prompt h4{font-family:'Fredoka One',cursive;font-size:1.05rem;color:#92400E;margin-bottom:.5rem;}
+  .creative-prompt p{font-size:.9rem;color:#44403C;line-height:1.6;margin-bottom:.8rem;}
+  .writing-area{width:100%;min-height:90px;border:2px solid #BAE6FD;border-radius:12px;padding:.8rem;font-family:'Nunito',sans-serif;font-size:.9rem;resize:vertical;outline:none;transition:border-color .2s;color:#1E293B;}
+  .writing-area:focus{border-color:var(--main);}
+  .char-count{font-size:.76rem;color:#94A3B8;margin-top:.25rem;text-align:right;}
+  .tip-green{background:#ECFDF5;border-radius:12px;padding:1rem 1.2rem;margin-top:.5rem;border:2px solid #A7F3D0;font-size:.88rem;font-weight:600;color:#065F46;}
+  .btn{font-family:'Nunito',sans-serif;font-weight:800;background:var(--main);color:#fff;border:none;border-radius:99px;padding:.55rem 1.5rem;cursor:pointer;font-size:.92rem;transition:background .2s,transform .15s;margin-top:.8rem;}
+  .btn:hover{background:#0284C7;transform:translateY(-1px);}
+  @media(max-width:500px){.story-grid{grid-template-columns:1fr;}.characters{grid-template-columns:repeat(2,1fr);}.bv-grid{grid-template-columns:repeat(2,1fr);}nav button{font-size:.78rem;padding:.4rem .85rem;}}
+</style>
+</head>
+<body>
+<header>
+  <span class="book-emoji">🛹</span>
+  <div class="level-badge">Kids Starter · Instituto Cambridge 2026</div>
+  <h1>The Skateboarder</h1>
+  <p class="sub">by Christine Lindop · Oxford Dominoes Quick Starter</p>
+</header>
+
+<nav>
+  <button class="active" onclick="showTab('about',this)">📖 About</button>
+  <button onclick="showTab('vocab',this)">📚 Vocabulary</button>
+  <button onclick="showTab('comprehension',this)">🔍 Comprehension</button>
+  <button onclick="showTab('creative',this)">✍️ Creative</button>
+</nav>
+
+<!-- ABOUT -->
+<section id="about" class="active">
+  <div class="card">
+    <h2>📖 About the Book</h2>
+    <div class="story-grid">
+      <div class="story-fact"><div class="label">Author</div><div class="value">Christine Lindop</div></div>
+      <div class="story-fact"><div class="label">Publisher</div><div class="value">Oxford University Press</div></div>
+      <div class="story-fact"><div class="label">Series</div><div class="value">Dominoes Quick Starter</div></div>
+      <div class="story-fact"><div class="label">Genre</div><div class="value">🏙️ Contemporary / Sport</div></div>
+    </div>
+    <div class="synopsis">
+      Hannah loves watching Owen do amazing skateboard tricks at the skatepark near her house. She wants to skateboard too — but can she do it? Who laughs at her? Who helps her? And can Hannah become a real skateboarder in the end? 🛹
+    </div>
+  </div>
+  <div class="card">
+    <h2>👥 Characters</h2>
+    <div class="characters">
+      <div class="char-card"><span class="char-emoji">👧</span><div class="char-name">Hannah</div><div class="char-desc">The main character. She loves skateboarding and wants to learn.</div></div>
+      <div class="char-card"><span class="char-emoji">🧑‍🤝‍🧑</span><div class="char-name">Owen</div><div class="char-desc">An amazing skateboarder. Hannah admires his tricks.</div></div>
+      <div class="char-card"><span class="char-emoji">👦</span><div class="char-name">Evan</div><div class="char-desc">Hannah's brother. He asks annoying questions.</div></div>
+      <div class="char-card"><span class="char-emoji">🧑</span><div class="char-name">Justin</div><div class="char-desc">Hannah's cousin. He helps her practise skateboarding.</div></div>
+      <div class="char-card"><span class="char-emoji">👩</span><div class="char-name">Mum &amp; Dad</div><div class="char-desc">Hannah's parents. They give her a special birthday present.</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🗺️ Story Map</h2>
+    <div style="display:flex;flex-direction:column;gap:.7rem;margin-top:.5rem;">
+      <div style="background:#F0F9FF;border-radius:12px;padding:.9rem 1.1rem;border-left:4px solid var(--main);font-size:.92rem;font-weight:600;">🏠 <strong>Beginning:</strong> A new skatepark opens near Hannah's house. She sees Owen and falls in love with skateboarding.</div>
+      <div style="background:#FFF7ED;border-radius:12px;padding:.9rem 1.1rem;border-left:4px solid var(--yellow);font-size:.92rem;font-weight:600;">⚡ <strong>Middle:</strong> Hannah tries to skateboard but finds it very hard. Some people laugh at her. She feels sad but doesn't give up.</div>
+      <div style="background:#ECFDF5;border-radius:12px;padding:.9rem 1.1rem;border-left:4px solid var(--green);font-size:.92rem;font-weight:600;">🎉 <strong>End:</strong> On her birthday, Hannah gets a skateboard as a present. With Justin's help, she practises and learns. She becomes a real skateboarder!</div>
+    </div>
+  </div>
+</section>
+
+<!-- VOCABULARY -->
+<section id="vocab">
+  <div class="card">
+    <h2>📚 Key Words from the Story</h2>
+    <p style="color:#475569;font-size:.88rem;margin-bottom:.5rem;">Learn these words — they are all in the book!</p>
+    <div class="bv-grid" id="bvGrid"></div>
+  </div>
+</section>
+
+<!-- COMPREHENSION -->
+<section id="comprehension">
+  <div class="card">
+    <h2>🔍 Reading Comprehension</h2>
+    <p style="color:#475569;font-size:.88rem;margin-bottom:1rem;">Answer these questions about the story!</p>
+    <div class="score-bar">
+      <span>Score:</span>
+      <div class="progress-wrap"><div class="progress-fill" id="rcFill" style="width:0%"></div></div>
+      <span id="rcText">0 / 6</span>
+    </div>
+    <div id="rcBox"></div>
+    <button class="btn" onclick="resetRC()">🔄 Try Again</button>
+  </div>
+</section>
+
+<!-- CREATIVE -->
+<section id="creative">
+  <div class="card">
+    <h2>✍️ Creative Activities</h2>
+    <p style="color:#475569;font-size:.88rem;margin-bottom:1.2rem;">Use your imagination and write in English! 🌟</p>
+
+    <div class="creative-prompt">
+      <h4>🎂 Activity 1 – Hannah's Birthday Card</h4>
+      <p>Write a birthday card from Hannah's parents. Tell Hannah what her present is and why they think she will love it. Use <strong>to be</strong> and <strong>have got</strong>. Write 4–5 sentences.</p>
+      <textarea class="writing-area" id="c1" placeholder="Dear Hannah, Happy Birthday! You have got a new..." oninput="cc('c1','cc1')"></textarea>
+      <div class="char-count" id="cc1">0 characters</div>
+    </div>
+
+    <div class="creative-prompt">
+      <h4>🎤 Activity 2 – Be a Sports Reporter!</h4>
+      <p>You are at the skatepark watching Hannah practise. Write a short news report about what you see. Use <strong>There is / There are</strong> and <strong>This / That / These / Those</strong>. Write 4–5 sentences.</p>
+      <textarea class="writing-area" id="c2" placeholder="Today at the skatepark, there are many young skaters. This girl..." oninput="cc('c2','cc2')"></textarea>
+      <div class="char-count" id="cc2">0 characters</div>
+    </div>
+
+    <div class="creative-prompt">
+      <h4>🏆 Activity 3 – Your Own Superpower</h4>
+      <p>Hannah learns to skateboard. What is YOUR superpower skill? Write about something you are good at or want to learn. Use <strong>I am</strong>, <strong>I have got</strong>, and <strong>I can / I can't</strong>. Write 5 sentences.</p>
+      <textarea class="writing-area" id="c3" placeholder="I am good at... I have got... I can..." oninput="cc('c3','cc3')"></textarea>
+      <div class="char-count" id="cc3">0 characters</div>
+    </div>
+
+    <div class="tip-green">💡 <strong>Remember:</strong> Check your capital letters and full stops. Read your writing out loud — does it sound right?</div>
+  </div>
+</section>
+
+<script>
+// VOCAB
+const bv=[
+  {w:'skatepark',d:'a place with ramps and areas for skateboarding 🛹'},
+  {w:'trick',d:'a special and difficult movement on a skateboard'},
+  {w:'skateboard',d:'a flat board with wheels that you stand on to move'},
+  {w:'practise',d:'to do something again and again to get better at it'},
+  {w:'fall over',d:'to lose your balance and go to the ground'},
+  {w:'excited',d:'very happy because something good is happening 😃'},
+  {w:'cousin',d:'the child of your aunt or uncle 👨‍👩‍👦'},
+  {w:'present',d:'a gift you give to someone, usually on a special day 🎁'},
+  {w:'birthday',d:'the day you were born, celebrated every year 🎂'},
+  {w:'laugh',d:'to make a sound because something is funny 😄'},
+  {w:'dumb',d:'silly or stupid (what Evan says in the story)'},
+  {w:'stay on',d:'to not fall off something while moving'},
+  {w:'trick',d:'a special difficult move done on a skateboard'},
+  {w:'bench',d:'a long seat, usually made of wood, outside 🪑'},
+];
+document.getElementById('bvGrid').innerHTML=bv.map(v=>`<div class="bv-item"><div class="bv-word">${v.w}</div><div class="bv-def">${v.d}</div></div>`).join('');
+
+// RC QUESTIONS
+const rq=[
+  {q:'What opens near Hannah\'s house?',opts:['A swimming pool','A skatepark','A cinema','A park'],a:'A skatepark'},
+  {q:'Who does Hannah love watching skateboard?',opts:['Justin','Evan','Owen','Her dad'],a:'Owen'},
+  {q:'What does Evan do that makes Hannah angry?',opts:['He breaks her skateboard','He asks dumb questions','He laughs at her tricks','He takes her present'],a:'He asks dumb questions'},
+  {q:'What birthday present does Hannah get?',opts:['A bicycle','Roller skates','A skateboard','New shoes'],a:'A skateboard'},
+  {q:'Who teaches Hannah to skateboard?',opts:['Owen','Evan','Her mum','Justin'],a:'Justin'},
+  {q:'What is the main message of the story? 💬',opts:['Skateboarding is dangerous','Never give up — practise and you can do it!','Only boys can skateboard','You need a lot of money for hobbies'],a:'Never give up — practise and you can do it!'},
+];
+let rScore=0,rAns=new Array(rq.length).fill(false);
+function buildRC(){
+  document.getElementById('rcBox').innerHTML=rq.map((q,i)=>`
+    <div class="q-block"><p>${i+1}. ${q.q}</p>
+    <div class="opts">${q.opts.map(o=>`<button class="opt" onclick="aRC(this,\`${o}\`,\`${q.a}\`,${i})">${o}</button>`).join('')}</div>
+    <div class="fb" id="fb${i}"></div></div>`).join('');
+}
+function aRC(btn,chosen,correct,idx){
+  if(rAns[idx])return;rAns[idx]=true;
+  const all=btn.parentElement.querySelectorAll('.opt');all.forEach(b=>b.classList.add('disabled'));
+  if(chosen===correct){btn.classList.add('correct');rScore++;document.getElementById('fb'+idx).textContent='✅ Correct!';document.getElementById('fb'+idx).className='fb ok';}
+  else{btn.classList.add('wrong');all.forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});document.getElementById('fb'+idx).textContent='❌ Answer: '+correct;document.getElementById('fb'+idx).className='fb no';}
+  document.getElementById('rcText').textContent=rScore+' / '+rq.length;
+  document.getElementById('rcFill').style.width=(rScore/rq.length*100)+'%';
+}
+function resetRC(){rScore=0;rAns=new Array(rq.length).fill(false);buildRC();document.getElementById('rcText').textContent='0 / '+rq.length;document.getElementById('rcFill').style.width='0%';}
+buildRC();
+
+function cc(id,cid){document.getElementById(cid).textContent=document.getElementById(id).value.length+' characters';}
+function showTab(id,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+</script>
+</body>
+</html>

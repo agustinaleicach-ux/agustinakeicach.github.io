@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>The Selfish Giant – Kids 3 Reader</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&family=Fredoka+One&display=swap" rel="stylesheet">
+<style>
+  :root{--main:#059669;--dark:#064E3B;--light:#ECFDF5;--yellow:#FBBF24;--green:#4ADE80;--red:#FB7185;}
+  *{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Nunito',sans-serif;background:var(--light);color:var(--dark);}
+  header{background:linear-gradient(135deg,#065F46,#059669,#34D399);padding:2rem 1.5rem 3rem;text-align:center;position:relative;overflow:hidden;}
+  header::before{content:'';position:absolute;bottom:-1px;left:0;right:0;height:50px;background:var(--light);clip-path:ellipse(55% 100% at 50% 100%);}
+  .level-badge{display:inline-block;background:rgba(255,255,255,.25);color:#fff;font-weight:800;font-size:.78rem;padding:.3rem 1rem;border-radius:99px;margin-bottom:.6rem;}
+  .book-emoji{font-size:3.5rem;display:block;margin-bottom:.5rem;}
+  header h1{font-family:'Fredoka One',cursive;font-size:clamp(1.8rem,5vw,3rem);color:#fff;text-shadow:0 3px 10px rgba(0,0,0,.2);}
+  header .sub{color:rgba(255,255,255,.9);font-weight:700;margin-top:.4rem;font-size:.95rem;}
+  nav{display:flex;justify-content:center;gap:.6rem;flex-wrap:wrap;padding:1.5rem 1rem .5rem;}
+  nav button{font-family:'Nunito',sans-serif;font-weight:800;font-size:.88rem;padding:.5rem 1.2rem;border:3px solid transparent;border-radius:99px;cursor:pointer;transition:all .2s;background:#fff;color:var(--dark);box-shadow:0 2px 8px rgba(0,0,0,.08);}
+  nav button.active{background:var(--main);color:#fff;border-color:var(--main);}
+  nav button:hover:not(.active){border-color:var(--main);}
+  section{display:none;padding:1.5rem;max-width:820px;margin:0 auto 3rem;}
+  section.active{display:block;}
+  .card{background:#fff;border-radius:20px;padding:1.8rem;box-shadow:0 4px 20px rgba(0,0,0,.07);margin-bottom:1.4rem;}
+  .card h2{font-family:'Fredoka One',cursive;font-size:1.45rem;margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  .story-grid{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-top:1rem;}
+  .story-fact{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:2px solid #A7F3D0;border-radius:14px;padding:1rem;text-align:center;}
+  .story-fact .label{font-size:.75rem;font-weight:800;color:#047857;text-transform:uppercase;letter-spacing:.05em;}
+  .story-fact .value{font-size:.95rem;font-weight:700;margin-top:.3rem;}
+  .synopsis{background:linear-gradient(135deg,#FEF9C3,#FEF08A);border-left:5px solid var(--yellow);border-radius:0 14px 14px 0;padding:1.1rem 1.3rem;margin-top:1rem;font-size:.95rem;line-height:1.7;color:#44403C;font-weight:600;}
+  .characters{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.8rem;margin-top:1rem;}
+  .char-card{background:#ECFDF5;border:2px solid #A7F3D0;border-radius:14px;padding:.9rem;text-align:center;}
+  .char-card .char-emoji{font-size:2rem;display:block;margin-bottom:.3rem;}
+  .char-card .char-name{font-weight:800;font-size:.92rem;color:var(--main);}
+  .char-card .char-desc{font-size:.75rem;color:#6B7280;margin-top:.2rem;line-height:1.4;}
+  .bv-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(155px,1fr));gap:.8rem;margin-top:1rem;}
+  .bv-item{background:linear-gradient(135deg,#ECFDF5,#D1FAE5);border:2px solid #6EE7B7;border-radius:14px;padding:.9rem;transition:transform .2s;cursor:default;}
+  .bv-item:hover{transform:translateY(-3px);}
+  .bv-word{font-weight:800;color:#047857;font-size:.95rem;}
+  .bv-def{font-size:.78rem;color:#374151;margin-top:.3rem;line-height:1.4;}
+  .q-block{background:#F9FAFB;border-radius:14px;padding:1.1rem;margin-bottom:1rem;border:2px solid #E5E7EB;}
+  .q-block p{font-weight:700;margin-bottom:.8rem;font-size:.98rem;}
+  .opts{display:flex;flex-wrap:wrap;gap:.5rem;}
+  .opt{font-family:'Nunito',sans-serif;font-weight:700;padding:.45rem 1.1rem;border-radius:99px;border:2.5px solid #D1D5DB;background:#fff;cursor:pointer;font-size:.88rem;transition:all .2s;}
+  .opt:hover{border-color:var(--main);background:#ECFDF5;}
+  .opt.correct{background:#DCFCE7;border-color:var(--green);color:#166534;}
+  .opt.wrong{background:#FFE4E6;border-color:var(--red);color:#9F1239;}
+  .opt.disabled{pointer-events:none;}
+  .fb{margin-top:.5rem;font-weight:700;font-size:.88rem;min-height:1rem;}
+  .fb.ok{color:#16A34A;} .fb.no{color:#DC2626;}
+  .score-bar{display:flex;align-items:center;gap:1rem;background:#F9FAFB;border-radius:14px;padding:.9rem 1.2rem;margin-bottom:1.2rem;}
+  .score-bar span{font-weight:800;}
+  .progress-wrap{flex:1;background:#E5E7EB;border-radius:99px;height:10px;overflow:hidden;}
+  .progress-fill{height:100%;background:linear-gradient(90deg,var(--green),var(--main));border-radius:99px;transition:width .4s;}
+  .creative-prompt{background:linear-gradient(135deg,#FEF9C3,#FEF08A);border:2px solid #FCD34D;border-radius:14px;padding:1.2rem;margin-bottom:1rem;}
+  .creative-prompt h4{font-family:'Fredoka One',cursive;font-size:1.05rem;color:#92400E;margin-bottom:.5rem;}
+  .creative-prompt p{font-size:.9rem;color:#44403C;line-height:1.6;margin-bottom:.8rem;}
+  .writing-area{width:100%;min-height:90px;border:2px solid #A7F3D0;border-radius:12px;padding:.8rem;font-family:'Nunito',sans-serif;font-size:.9rem;resize:vertical;outline:none;transition:border-color .2s;color:#1E293B;}
+  .writing-area:focus{border-color:var(--main);}
+  .char-count{font-size:.76rem;color:#94A3B8;margin-top:.25rem;text-align:right;}
+  .tip-green{background:#ECFDF5;border-radius:12px;padding:1rem 1.2rem;margin-top:.5rem;border:2px solid #A7F3D0;font-size:.88rem;font-weight:600;color:#065F46;}
+  .btn{font-family:'Nunito',sans-serif;font-weight:800;background:var(--main);color:#fff;border:none;border-radius:99px;padding:.55rem 1.5rem;cursor:pointer;font-size:.92rem;transition:background .2s;margin-top:.8rem;}
+  .btn:hover{background:#047857;}
+  .story-map-item{border-radius:12px;padding:.9rem 1.1rem;margin-bottom:.6rem;font-size:.92rem;font-weight:600;}
+  @media(max-width:500px){.story-grid{grid-template-columns:1fr;}.bv-grid{grid-template-columns:repeat(2,1fr);}nav button{font-size:.78rem;padding:.4rem .85rem;}}
+</style>
+</head>
+<body>
+<header>
+  <span class="book-emoji">🌸</span>
+  <div class="level-badge">Kids 3 · Instituto Cambridge 2026</div>
+  <h1>The Selfish Giant</h1>
+  <p class="sub">Primary Readers Level 2 · MM Publications · Based on Oscar Wilde</p>
+</header>
+<nav>
+  <button class="active" onclick="showTab('about',this)">📖 About</button>
+  <button onclick="showTab('vocab',this)">📚 Vocabulary</button>
+  <button onclick="showTab('comprehension',this)">🔍 Comprehension</button>
+  <button onclick="showTab('creative',this)">✍️ Creative</button>
+</nav>
+
+<section id="about" class="active">
+  <div class="card">
+    <h2>📖 About the Book</h2>
+    <div class="story-grid">
+      <div class="story-fact"><div class="label">Original Author</div><div class="value">Oscar Wilde</div></div>
+      <div class="story-fact"><div class="label">Series</div><div class="value">MM Primary Readers</div></div>
+      <div class="story-fact"><div class="label">Genre</div><div class="value">🌸 Classic / Fantasy</div></div>
+      <div class="story-fact"><div class="label">Theme</div><div class="value">❤️ Kindness & Sharing</div></div>
+    </div>
+    <div class="synopsis">A giant has a beautiful garden, but he is selfish — he doesn't let any children play in it. He builds a tall wall and the garden becomes cold and sad forever. Then one day, a small boy changes everything. Will the giant learn to be kind? 🌱</div>
+  </div>
+  <div class="card">
+    <h2>👥 Characters</h2>
+    <div class="characters">
+      <div class="char-card"><span class="char-emoji">🧟</span><div class="char-name">The Giant</div><div class="char-desc">Big and selfish at first. He changes by the end of the story.</div></div>
+      <div class="char-card"><span class="char-emoji">👦</span><div class="char-name">The Little Boy</div><div class="char-desc">A small, mysterious child who changes the giant's heart.</div></div>
+      <div class="char-card"><span class="char-emoji">🧒</span><div class="char-name">The Children</div><div class="char-desc">They love playing in the garden but the giant sends them away.</div></div>
+      <div class="char-card"><span class="char-emoji">❄️</span><div class="char-name">Winter</div><div class="char-desc">Always stays in the garden while the giant is selfish.</div></div>
+    </div>
+  </div>
+  <div class="card">
+    <h2>🗺️ Story Map</h2>
+    <div class="story-map-item" style="background:#ECFDF5;border-left:4px solid var(--main);">🏡 <strong>Beginning:</strong> The giant returns home and finds children playing in his garden. He gets very angry and builds a big wall. Spring never comes to his garden.</div>
+    <div class="story-map-item" style="background:#FFFBEB;border-left:4px solid var(--yellow);">🌱 <strong>Middle:</strong> One day the giant hears birds singing and sees flowers. Through a hole in the wall, the children came back — and with them, spring! One small boy can't climb a tree.</div>
+    <div class="story-map-item" style="background:#ECFDF5;border-left:4px solid var(--green);">💚 <strong>End:</strong> The giant helps the little boy and knocks down the wall. He becomes kind and shares his garden. Years later, the mysterious boy returns and the giant understands everything. 🌸</div>
+  </div>
+</section>
+
+<section id="vocab">
+  <div class="card">
+    <h2>📚 Key Words from the Story</h2>
+    <div class="bv-grid" id="bvGrid"></div>
+  </div>
+</section>
+
+<section id="comprehension">
+  <div class="card">
+    <h2>🔍 Reading Comprehension</h2>
+    <p style="color:#6B7280;font-size:.88rem;margin-bottom:1rem;">Answer these questions about the story!</p>
+    <div class="score-bar">
+      <span>Score:</span>
+      <div class="progress-wrap"><div class="progress-fill" id="rcFill" style="width:0%"></div></div>
+      <span id="rcText">0 / 7</span>
+    </div>
+    <div id="rcBox"></div>
+    <button class="btn" onclick="resetRC()">🔄 Try Again</button>
+  </div>
+</section>
+
+<section id="creative">
+  <div class="card">
+    <h2>✍️ Creative Activities</h2>
+    <div class="creative-prompt">
+      <h4>📰 Activity 1 – The Giant's Diary (Past Simple)</h4>
+      <p>Write a diary entry for the giant on the day he helped the little boy. Use <strong>Past Simple</strong> verbs (walked, saw, felt, helped, knocked…). Write 5–6 sentences.</p>
+      <textarea class="writing-area" id="c1" placeholder="Dear Diary, Today I walked into my garden and saw something amazing. I felt..." oninput="cc('c1','cc1')"></textarea>
+      <div class="char-count" id="cc1">0 characters</div>
+    </div>
+    <div class="creative-prompt">
+      <h4>🌡️ Activity 2 – Season Comparisons</h4>
+      <p>In the story, the giant's garden in winter is sadder and colder than in spring. Compare the two seasons using <strong>comparative adjectives</strong> (bigger, more beautiful, warmer, colder…). Write 6 sentences.</p>
+      <textarea class="writing-area" id="c2" placeholder="In winter, the giant's garden was colder than... Spring was more beautiful because..." oninput="cc('c2','cc2')"></textarea>
+      <div class="char-count" id="cc2">0 characters</div>
+    </div>
+    <div class="creative-prompt">
+      <h4>💌 Activity 3 – A Letter of Apology</h4>
+      <p>Write a letter from the giant to the children, apologising for being selfish. Use <strong>Past Simple</strong> to say what he did wrong and <strong>going to</strong> for his promises. Write 6–7 sentences.</p>
+      <textarea class="writing-area" id="c3" placeholder="Dear Children, I am sorry. I was very selfish. I built a wall and... I am going to..." oninput="cc('c3','cc3')"></textarea>
+      <div class="char-count" id="cc3">0 characters</div>
+    </div>
+    <div class="tip-green">💡 <strong>Did you know?</strong> Oscar Wilde wrote this story in 1888. He was Irish and wrote many famous stories and plays. The Selfish Giant is one of his most loved fairy tales! 🇮🇪</div>
+  </div>
+</section>
+
+<script>
+const bv=[
+  {w:'selfish',d:'only thinking about yourself and not others 😤'},
+  {w:'giant',d:'a very, very big person or creature 🧟'},
+  {w:'garden',d:'a piece of land with plants, trees and flowers 🌸'},
+  {w:'wall',d:'a flat structure made of stone or brick. It divides two areas.'},
+  {w:'spring',d:'the season after winter when flowers grow 🌱'},
+  {w:'blossom',d:'the flowers that appear on trees in spring 🌸'},
+  {w:'frost',d:'a thin layer of ice that forms on cold surfaces ❄️'},
+  {w:'knock down',d:'to destroy something by hitting it hard 💥'},
+  {w:'mysterious',d:'strange and difficult to understand 🕵️'},
+  {w:'wound',d:'an injury on the body, usually from something sharp'},
+  {w:'share',d:'to give part of something to others 🤝'},
+  {w:'lonely',d:'sad because you are alone and have no friends 😔'},
+  {w:'forgive',d:'to stop being angry with someone who did something wrong'},
+  {w:'climb',d:'to go up something using your hands and feet 🧗'},
+];
+document.getElementById('bvGrid').innerHTML=bv.map(v=>`<div class="bv-item"><div class="bv-word">${v.w}</div><div class="bv-def">${v.d}</div></div>`).join('');
+
+const rq=[
+  {q:'Why did the giant build a wall around his garden?',opts:['To keep out animals','He didn\'t want children to play there','To make it look beautiful','The wall was already there'],a:'He didn\'t want children to play there'},
+  {q:'What happened to the garden after the giant built the wall?',opts:['It became more beautiful','Spring never came — only winter stayed','The children destroyed it','It became a forest'],a:'Spring never came — only winter stayed'},
+  {q:'What did the giant hear that made him look outside one day?',opts:['Children shouting','A wolf howling','Birds singing','Thunder'],a:'Birds singing'},
+  {q:'Who could not climb the tree? 🌳',opts:['The giant','A little girl','The smallest boy','Evan the brother'],a:'The smallest boy'},
+  {q:'What did the giant do after he helped the boy?',opts:['He built the wall higher','He knocked down the wall','He went back to sleep','He ran away'],a:'He knocked down the wall'},
+  {q:'Which comparative is correct for this story?',opts:['The garden was more cold in winter','The garden was colder in winter','The garden was coldest in winter','The garden was most cold in winter'],a:'The garden was colder in winter'},
+  {q:'What is the main message of the story? 💬',opts:['Gardens are dangerous','Being selfish makes you happy','Kindness and sharing bring happiness','Children should not play outside'],a:'Kindness and sharing bring happiness'},
+];
+let rScore=0,rAns=new Array(rq.length).fill(false);
+function buildRC(){
+  document.getElementById('rcBox').innerHTML=rq.map((q,i)=>`
+    <div class="q-block"><p>${i+1}. ${q.q}</p>
+    <div class="opts">${q.opts.map(o=>`<button class="opt" onclick="aRC(this,\`${o.replace(/`/g,"'")}\`,\`${q.a.replace(/`/g,"'")}\`,${i})">${o}</button>`).join('')}</div>
+    <div class="fb" id="fb${i}"></div></div>`).join('');
+}
+function aRC(btn,chosen,correct,idx){
+  if(rAns[idx])return;rAns[idx]=true;
+  const all=btn.parentElement.querySelectorAll('.opt');all.forEach(b=>b.classList.add('disabled'));
+  if(chosen===correct){btn.classList.add('correct');rScore++;document.getElementById('fb'+idx).textContent='✅ Correct!';document.getElementById('fb'+idx).className='fb ok';}
+  else{btn.classList.add('wrong');all.forEach(b=>{if(b.textContent===correct)b.classList.add('correct');});document.getElementById('fb'+idx).textContent='❌ Answer: '+correct;document.getElementById('fb'+idx).className='fb no';}
+  document.getElementById('rcText').textContent=rScore+' / '+rq.length;
+  document.getElementById('rcFill').style.width=(rScore/rq.length*100)+'%';
+}
+function resetRC(){rScore=0;rAns=new Array(rq.length).fill(false);buildRC();document.getElementById('rcText').textContent='0 / '+rq.length;document.getElementById('rcFill').style.width='0%';}
+buildRC();
+function cc(id,cid){document.getElementById(cid).textContent=document.getElementById(id).value.length+' characters';}
+function showTab(id,btn){
+  document.querySelectorAll('section').forEach(s=>s.classList.remove('active'));
+  document.querySelectorAll('nav button').forEach(b=>b.classList.remove('active'));
+  document.getElementById(id).classList.add('active');btn.classList.add('active');
+}
+</script>
+</body>
+</html>
