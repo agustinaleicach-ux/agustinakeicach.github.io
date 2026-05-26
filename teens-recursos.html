@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TEENS - Recursos Interactivos</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #003B8F;
+            --primary-medium: #1B5FB0;
+            --primary-light: #00A8E1;
+            --accent: #FF6B5B;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--primary-dark) 0%, var(--primary-light) 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            font-size: 1.1rem;
+            opacity: 0.95;
+        }
+
+        main {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 1rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary-medium);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .articles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2rem 0;
+        }
+
+        .article-card {
+            background: var(--white);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .article-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .article-card img {
+            width: 100%;
+            height: 300px;
+            object-fit: contain;
+            display: block;
+            background-color: #f0f4f8;
+        }
+
+        .article-content {
+            padding: 1.5rem;
+        }
+
+        .article-content h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .article-content h4 {
+            color: var(--primary-medium);
+            margin-top: 1rem;
+            margin-bottom: 0.5rem;
+            font-size: 1rem;
+        }
+
+        .article-content p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 0.6rem 1.2rem;
+            background-color: var(--accent);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-weight: bold;
+            border: none;
+            cursor: pointer;
+            font-size: 0.9rem;
+            margin-right: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .btn:hover {
+            background-color: #ff5542;
+        }
+
+        .btn-secondary {
+            background-color: var(--primary-medium);
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .btn-download {
+            background-color: #28a745;
+        }
+
+        .btn-download:hover {
+            background-color: #218838;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🎓 TEENS - Recursos Interactivos</h1>
+        <p>Recursos educativos para estudiantes de nivel Teens</p>
+    </header>
+
+    <main>
+        <a href="index.html#recursos" class="back-button">← Volver a Recursos</a>
+
+        <div class="articles-grid">
+            <!-- TEENS 1 -->
+            <div class="article-card">
+                <img src="prepare-1-teens1.jpg" alt="Prepare Level 1 - Teens 1" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 1</h3>
+                    <p>Prepare Level 1</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-1-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-1.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_1_EXAM_PRACTICES_1-2-3-4.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+
+            <!-- TEENS 2 -->
+            <div class="article-card">
+                <img src="prepare-2-teens2.jpg" alt="Prepare Level 2 - Teens 2" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 2</h3>
+                    <p>Prepare Level 2</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-2-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-2.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_2_EXAM_PRACTICES_1A-1B-1C-1D.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+
+            <!-- TEENS 3 -->
+            <div class="article-card">
+                <img src="harmonize-3-teens3.jpg" alt="Harmonize 3 - Teens 3" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 3</h3>
+                    <p>Harmonize 3</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-3-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-3.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_3_EXAM_PRACTICES_1-2.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+
+            <!-- TEENS 4 -->
+            <div class="article-card">
+                <img src="harmonize-4-teens4.jpg" alt="Harmonize 4 - Teens 4" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 4</h3>
+                    <p>Harmonize 4</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-4-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-4.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_4_EXAM_PRACTICES_1-2a-2b.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+
+            <!-- TEENS 5 -->
+            <div class="article-card">
+                <img src="harmonize-5-teens5.jpg" alt="Harmonize 5 - Teens 5" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 5</h3>
+                    <p>Harmonize 5</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-5-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-5.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_5_EXAM_PRACTICES_1-2.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+
+            <!-- TEENS 6 -->
+            <div class="article-card">
+                <img src="harmonize-5-teens6.jpg" alt="Harmonize 5 - Teens 6" style="width: 100%; height: 300px; object-fit: contain; display: block; background-color: #f0f4f8;">
+                <div class="article-content">
+                    <h3>Teens 6</h3>
+                    <p>Harmonize 5</p>
+                    
+                    <h4>📚 Libro de Clase</h4>
+                    <a href="teens-6-recursos.html" class="btn">Acceder →</a>
+                    
+                    <h4>📖 Reader</h4>
+                    <a href="reader-teens-6.html" class="btn btn-secondary">Acceder →</a>
+                    
+                    <h4>📝 Examen Práctica</h4>
+                    <a href="TEENS_6_EXAM_PRACTICES_1-2.pdf" class="btn btn-download" download>Descargar →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Instituto Cambridge - Comisiones</p>
+    </footer>
+</body>
+</html>
