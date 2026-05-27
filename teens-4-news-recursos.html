@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teens 4 — News Activities 2025</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --accent: #7C3AED;
+    --light: #F5F3FF;
+    --border: #E9ECEF;
+    --text: #1A1A2E;
+    --muted: #6C757D;
+    --green: #2D9B6F;
+    --red: #DC3545;
+    --surface: #FFFFFF;
+    --bg: #F8F9FA;
+  }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Inter', system-ui, sans-serif; background: var(--bg); color: var(--text); line-height: 1.65; }
+
+  /* HEADER */
+  .page-header { background: var(--accent); padding: 2.2rem 2rem 1.8rem; }
+  .header-inner { max-width: 920px; margin: 0 auto; }
+  .header-label { display: inline-block; background: rgba(255,255,255,.15); color: rgba(255,255,255,.9); font-size: .72rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; padding: .25rem .75rem; border-radius: 4px; margin-bottom: .65rem; }
+  .header-title { font-size: clamp(1.6rem,3.5vw,2.4rem); font-weight: 700; color: #fff; line-height: 1.15; letter-spacing: -.02em; }
+  .header-sub { color: rgba(255,255,255,.72); font-size: .85rem; margin-top: .35rem; }
+
+  /* NAV */
+  .tab-nav { background: var(--surface); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; }
+  .tab-nav-inner { max-width: 920px; margin: 0 auto; display: flex; overflow-x: auto; }
+  .tab-btn { font-family: inherit; font-size: .8rem; font-weight: 600; letter-spacing: .03em; padding: .85rem 1.1rem; border: none; background: none; color: var(--muted); cursor: pointer; white-space: nowrap; border-bottom: 2px solid transparent; transition: color .15s, border-color .15s; }
+  .tab-btn:hover { color: var(--text); }
+  .tab-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+
+  /* MAIN */
+  .main { max-width: 920px; margin: 0 auto; padding: 2rem 1.5rem 4rem; }
+  section { display: none; }
+  section.active { display: block; }
+
+  /* CARDS */
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.75rem; margin-bottom: 1.25rem; }
+  .card-title { font-size: 1rem; font-weight: 700; color: var(--text); margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem; }
+  .card-title::before { content: ''; display: inline-block; width: 3px; height: 1rem; background: var(--accent); border-radius: 2px; }
+
+  /* ARTICLE */
+  .article-meta { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 1rem; }
+  .tag { display: inline-block; font-size: .7rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; padding: .2rem .65rem; border-radius: 4px; }
+  .tag-topic { background: #EDE9FE; color: #6D28D9; }
+  .tag-level { background: #ECFDF5; color: #065F46; }
+  .tag-source { background: #FEF3C7; color: #92400E; }
+  .article-title { font-size: 1.2rem; font-weight: 700; color: var(--text); margin-bottom: .5rem; line-height: 1.3; }
+  .article-intro { font-size: .88rem; color: var(--muted); margin-bottom: 1.1rem; font-style: italic; }
+  .article-body { font-size: .92rem; color: #2D2D2D; line-height: 1.8; }
+  .article-body p { margin-bottom: .9rem; }
+  .article-body p:last-child { margin-bottom: 0; }
+  .highlight { background: #EDE9FE; padding: .1rem .3rem; border-radius: 3px; font-weight: 600; color: #6D28D9; cursor: help; position: relative; }
+  .source-note { font-size: .76rem; color: var(--muted); border-top: 1px solid var(--border); padding-top: .75rem; margin-top: 1.1rem; }
+
+  /* GLOSSARY */
+  .glossary-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: .6rem; margin-top: .75rem; }
+  .gloss-item { background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 7px; padding: .75rem .9rem; }
+  .gloss-word { font-size: .85rem; font-weight: 700; color: #6D28D9; }
+  .gloss-def { font-size: .78rem; color: var(--muted); margin-top: .2rem; line-height: 1.4; }
+
+  /* TRUE/FALSE */
+  .tf-item { border: 1px solid var(--border); border-radius: 8px; padding: 1.1rem; margin-bottom: .85rem; }
+  .tf-statement { font-size: .9rem; font-weight: 600; color: var(--text); margin-bottom: .75rem; line-height: 1.5; }
+  .tf-btns { display: flex; gap: .5rem; flex-wrap: wrap; }
+  .tf-btn { font-family: inherit; font-size: .82rem; font-weight: 600; padding: .4rem 1.1rem; border: 1.5px solid var(--border); border-radius: 5px; background: var(--surface); cursor: pointer; transition: all .15s; }
+  .tf-btn.true-btn:hover { border-color: #2D9B6F; background: #ECFDF5; color: #065F46; }
+  .tf-btn.false-btn:hover { border-color: #DC3545; background: #FEE2E2; color: #7F1D1D; }
+  .tf-btn.correct { background: #D1FAE5; border-color: #2D9B6F; color: #065F46; font-weight: 700; }
+  .tf-btn.wrong { background: #FEE2E2; border-color: #DC3545; color: #7F1D1D; }
+  .tf-btn.disabled { pointer-events: none; opacity: .6; }
+  .tf-feedback { font-size: .82rem; font-weight: 600; margin-top: .6rem; min-height: .9rem; }
+  .tf-feedback.ok { color: var(--green); }
+  .tf-feedback.no { color: var(--red); }
+  .tf-justification { font-size: .8rem; color: var(--muted); margin-top: .3rem; font-style: italic; line-height: 1.5; }
+
+  /* SCORE */
+  .score-row { display: flex; align-items: center; gap: 1rem; background: #F5F3FF; border: 1px solid #DDD6FE; border-radius: 8px; padding: .85rem 1.1rem; margin-bottom: 1.25rem; font-size: .85rem; font-weight: 600; color: var(--accent); }
+  .score-bar { flex: 1; height: 6px; background: #DDD6FE; border-radius: 3px; overflow: hidden; }
+  .score-fill { height: 100%; background: var(--accent); border-radius: 3px; transition: width .3s; }
+
+  /* OPINION */
+  .opinion-prompt { background: #FFFBEB; border-left: 3px solid #F59E0B; border-radius: 0 7px 7px 0; padding: .9rem 1.1rem; margin-bottom: .9rem; font-size: .88rem; line-height: 1.6; }
+  .opinion-prompt strong { color: #B45309; }
+  .writing-area { width: 100%; min-height: 90px; border: 1px solid var(--border); border-radius: 6px; padding: .75rem; font-family: inherit; font-size: .88rem; resize: vertical; outline: none; color: var(--text); background: var(--surface); transition: border-color .15s; margin-top: .5rem; }
+  .writing-area:focus { border-color: var(--accent); }
+  .char-count { font-size: .72rem; color: var(--muted); margin-top: .2rem; text-align: right; }
+  .grammar-tip { background: #EDE9FE; border-radius: 7px; padding: .9rem 1.1rem; margin-top: 1rem; font-size: .83rem; line-height: 1.6; }
+  .grammar-tip strong { color: #6D28D9; }
+
+  /* ARTICLE SELECTOR */
+  .article-pills { display: flex; gap: .5rem; flex-wrap: wrap; margin-bottom: 1.5rem; }
+  .article-pill { font-family: inherit; font-size: .8rem; font-weight: 600; padding: .4rem 1rem; border: 2px solid var(--border); border-radius: 99px; background: var(--surface); cursor: pointer; transition: all .15s; color: var(--muted); }
+  .article-pill.active { background: var(--accent); color: #fff; border-color: var(--accent); }
+  .article-pill:hover:not(.active) { border-color: var(--accent); color: var(--accent); }
+
+  /* PROGRESS */
+  .overall-score { background: var(--surface); border: 1px solid var(--border); border-radius: 10px; padding: 1.4rem; margin-bottom: 1.25rem; text-align: center; }
+  .big-score { font-size: 2.5rem; font-weight: 700; color: var(--accent); line-height: 1; }
+  .big-score-label { font-size: .82rem; color: var(--muted); margin-top: .3rem; }
+
+  /* BTN */
+  .btn-row { display: flex; gap: .6rem; margin-top: 1rem; flex-wrap: wrap; }
+  .btn { font-family: inherit; font-size: .82rem; font-weight: 600; padding: .45rem 1.1rem; border-radius: 5px; border: none; cursor: pointer; transition: opacity .15s; }
+  .btn:hover { opacity: .85; }
+  .btn-primary { background: var(--accent); color: #fff; }
+  .btn-ghost { background: var(--border); color: var(--muted); }
+
+  @media(max-width:520px) {
+    .glossary-grid { grid-template-columns: 1fr 1fr; }
+    .article-pills { gap: .35rem; }
+  }
+</style>
+</head>
+<body>
+
+<header class="page-header">
+  <div class="header-inner">
+    <div class="header-label">Teens 4 · Instituto Cambridge 2026 · B1+</div>
+    <h1 class="header-title">News Activities</h1>
+    <p class="header-sub">Read real news adapted to your level · True/False · Vocabulary · Opinion</p>
+  </div>
+</header>
+
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="Tab('read',this)">📰 Read</button>
+    <button class="tab-btn" onclick="Tab('vocab',this)">📚 Vocabulary</button>
+    <button class="tab-btn" onclick="Tab('truefalse',this)">✅ True / False</button>
+    <button class="tab-btn" onclick="Tab('opinion',this)">💬 Opinion</button>
+    <button class="tab-btn" onclick="Tab('progress',this)">📊 My Progress</button>
+  </div>
+</nav>
+
+<main class="main">
+
+  <!-- READ -->
+  <section id="read" class="active">
+    <div class="card">
+      <div class="card-title">Choose an article</div>
+      <div class="article-pills">
+        <button class="article-pill active" onclick="selectArticle(0,this)">📱 Phones in Schools</button>
+        <button class="article-pill" onclick="selectArticle(1,this)">🧬 Gene Therapy & Hearing</button>
+        <button class="article-pill" onclick="selectArticle(2,this)">🤖 AI Discovers Drug</button>
+      </div>
+      <div id="articleDisplay"></div>
+    </div>
+  </section>
+
+  <!-- VOCAB -->
+  <section id="vocab">
+    <div class="card">
+      <div class="card-title">Key Vocabulary</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.75rem;">Select an article first, then review its vocabulary.</p>
+      <div class="article-pills">
+        <button class="article-pill active" onclick="selectVocab(0,this)">📱 Phones in Schools</button>
+        <button class="article-pill" onclick="selectVocab(1,this)">🧬 Gene Therapy</button>
+        <button class="article-pill" onclick="selectVocab(2,this)">🤖 AI & Medicine</button>
+      </div>
+      <div class="glossary-grid" id="vocabDisplay"></div>
+    </div>
+  </section>
+
+  <!-- TRUE/FALSE -->
+  <section id="truefalse">
+    <div class="card">
+      <div class="card-title">True or False?</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.85rem;">Read the statement carefully. Is it true or false according to the article?</p>
+      <div class="article-pills">
+        <button class="article-pill active" onclick="selectTF(0,this)">📱 Phones in Schools</button>
+        <button class="article-pill" onclick="selectTF(1,this)">🧬 Gene Therapy</button>
+        <button class="article-pill" onclick="selectTF(2,this)">🤖 AI & Medicine</button>
+      </div>
+      <div class="score-row">
+        <span>Score</span>
+        <div class="score-bar"><div class="score-fill" id="tfFill" style="width:0%"></div></div>
+        <span id="tfScore">0 / 6</span>
+      </div>
+      <div id="tfDisplay"></div>
+      <div class="btn-row">
+        <button class="btn btn-primary" onclick="resetTF()">Reset</button>
+      </div>
+    </div>
+  </section>
+
+  <!-- OPINION -->
+  <section id="opinion">
+    <div class="card">
+      <div class="card-title">Your Opinion</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;">
+        Write your opinion using the grammar structures from <strong>Teens 4</strong>: 
+        Reported Speech, Relative Clauses, Third Conditional and Modal Deduction.
+      </p>
+      <div class="article-pills">
+        <button class="article-pill active" onclick="selectOpinion(0,this)">📱 Phones in Schools</button>
+        <button class="article-pill" onclick="selectOpinion(1,this)">🧬 Gene Therapy</button>
+        <button class="article-pill" onclick="selectOpinion(2,this)">🤖 AI & Medicine</button>
+      </div>
+      <div id="opinionDisplay"></div>
+    </div>
+  </section>
+
+  <!-- PROGRESS -->
+  <section id="progress">
+    <div class="overall-score">
+      <div class="big-score" id="bigScore">0</div>
+      <div class="big-score-label">Total correct answers across all articles</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Your Activity Summary</div>
+      <div id="progressDetail" style="font-size:.88rem;color:var(--muted);line-height:1.8;"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Grammar Tip of the Day</div>
+      <div class="grammar-tip">
+        <strong>Third Conditional in the news:</strong> When you read about events that happened differently, 
+        practise thinking in Third Conditional. <em>"If the school had banned phones earlier, students would 
+        have performed better."</em> Try writing one Third Conditional sentence about each article you read! 
+        This is exactly the grammar focus of Teens 4 (Harmonize 4, Units Welcome–7).
+      </div>
+    </div>
+  </section>
+
+</main>
+
+<script>
+var _articles = [
+  {
+    topic: "Society & Education",
+    level: "B1+ Intermediate",
+    source: "Adapted from BBC News & Positive News, 2025",
+    title: "Should Phones Be Banned in Schools?",
+    intro: "Countries around the world are debating whether smartphones should be allowed in classrooms. In 2025, several governments took action.",
+    body: [
+      "In 2025, South Korea became the latest country to ban smartphones in schools. The decision came after a study by the University of Pennsylvania found that students performed significantly better in classrooms where phones were not allowed. Teachers and parents welcomed the news.",
+      "Australia also introduced strict new laws in 2025. Under the new rules, children under 16 are not allowed to use social media platforms. The law was described as the strictest in the world. Some young people found ways around it, but supporters said it sent an important message.",
+      "The debate is not simple. Some students argue that phones are useful tools for learning. They say that banning devices which can access the internet is old-fashioned. However, researchers who have studied the issue say that without phones in class, children are better able to focus, connect with classmates, and achieve more.",
+      "A survey in the Netherlands produced similar results. Schools that banned smartphones reported fewer disciplinary problems and higher levels of student concentration. Teachers said they felt that their lessons were more effective when phones were absent.",
+      "If schools had introduced these bans earlier, experts say, student results might have improved sooner. The evidence is now clear: phone-free classrooms produce better outcomes for most students."
+    ],
+    tf: [
+      { s: "South Korea was the first country in the world to ban smartphones in schools.", ans: false, just: "The article says South Korea became 'the latest' country — not the first." },
+      { s: "A University of Pennsylvania study found that students did better without phones in class.", ans: true, just: "The article clearly states that the study found students 'performed significantly better' without phones." },
+      { s: "Australia's new law bans under-16s from all social media platforms.", ans: true, just: "The article says children under 16 'are not allowed to use social media platforms' under the new Australian law." },
+      { s: "All students agree that phones should be banned from schools.", ans: false, just: "The article says 'some students argue that phones are useful tools for learning' and oppose bans." },
+      { s: "Dutch schools that banned phones reported higher levels of student concentration.", ans: true, just: "The article says schools that banned smartphones reported 'fewer disciplinary problems and higher levels of student concentration'." },
+      { s: "The article concludes that phone bans have no clear effect on student results.", ans: false, just: "The article concludes that 'phone-free classrooms produce better outcomes for most students'." }
+    ],
+    vocab: [
+      { w: "ban", d: "an official rule that stops something from being done or used" },
+      { w: "perform", d: "to do something, especially to do it well or badly" },
+      { w: "significantly", d: "in a way that is large enough to be important or noticeable" },
+      { w: "strict", d: "demanding that rules are obeyed completely" },
+      { w: "debate", d: "a discussion where people express different opinions" },
+      { w: "disciplinary", d: "relating to rules and the punishment of behaviour that breaks those rules" },
+      { w: "concentration", d: "the ability to give all your attention to something" },
+      { w: "outcome", d: "the final result of a situation or process" },
+      { w: "evidence", d: "facts or information that help to prove something is true" },
+      { w: "absent", d: "not present; not in a place" },
+      { w: "old-fashioned", d: "no longer modern or suitable for the present time" },
+      { w: "disciplinary", d: "relating to rules and the action taken when rules are broken" }
+    ],
+    opinion: [
+      { prompt: "Do you think smartphones should be banned in your school? Why or why not?", tip: "Use <strong>modal deduction</strong>: 'Students must find it difficult to focus when...' / 'Teachers might feel that...' / 'Phones can't be completely responsible for...'" },
+      { prompt: "The article says researchers reported that phone-free classrooms produce better outcomes. Do you agree with this conclusion?", tip: "Use <strong>Reported Speech</strong>: 'The article states that researchers said students performed better...' / 'Experts claimed that...' / 'A survey showed that...'" },
+      { prompt: "Think about your own experience. If your school had banned phones two years ago, how do you think your learning would have been different?", tip: "Use the <strong>Third Conditional</strong>: 'If my school had banned phones, I would have...' / 'If we had not had access to social media during breaks, we might have...'" }
+    ]
+  },
+  {
+    topic: "Science & Medicine",
+    level: "B1+ Intermediate",
+    source: "Adapted from Positive News, 2025",
+    title: "A New Era: Gene Therapy Restores Hearing",
+    intro: "In 2025, a remarkable medical breakthrough gave hope to millions of people born with genetic hearing loss.",
+    body: [
+      "In July 2025, scientists announced a remarkable achievement: gene therapy had helped people who were born with genetic hearing loss to recover some of their hearing. For many of these patients, it was the first time they had ever been able to hear sounds clearly.",
+      "Gene therapy works by targeting the faulty gene that causes a condition and replacing or repairing it. In the case of hearing loss, scientists identified the specific gene responsible and were able to correct it. The results surprised even the researchers who designed the treatment.",
+      "The treatment is part of a broader wave of medical innovation that doctors are calling 'treating the untreatable'. Just a few months later, in October 2025, a different team of scientists revealed that blind people were able to read again thanks to a revolutionary eye implant. The device was inserted under the retina and, combined with video-recording glasses, allowed 84% of participants to read.",
+      "A world-first gene therapy treatment which turns white blood cells into a disease-fighting drug also reversed blood cancers in children in late 2025. These cancers had previously been considered impossible to treat.",
+      "Medical experts said that if these technologies had been available ten years earlier, thousands of patients would have had better outcomes. The developments represent a turning point in modern medicine."
+    ],
+    tf: [
+      { s: "Gene therapy for hearing loss was announced in October 2025.", ans: false, just: "The article says gene therapy for hearing loss was announced in July 2025, not October." },
+      { s: "Gene therapy works by targeting and correcting a faulty gene.", ans: true, just: "The article explains that gene therapy works 'by targeting the faulty gene that causes a condition and replacing or repairing it'." },
+      { s: "84% of participants in the eye implant trial were able to read afterwards.", ans: true, just: "The article clearly states that 'combined with video-recording glasses, allowed 84% of participants to read'." },
+      { s: "The blood cancer gene therapy was used only on adult patients.", ans: false, just: "The article says the treatment 'reversed blood cancers in children', not adults." },
+      { s: "Medical experts said these technologies came too late to help any patients.", ans: false, just: "The experts said if the technologies had been available earlier, patients 'would have had better outcomes' — they are still helping patients now." },
+      { s: "The article describes 2025 as a significant year for medical breakthroughs.", ans: true, just: "The article describes 'a broader wave of medical innovation' and 'a turning point in modern medicine', clearly presenting 2025 as a significant year." }
+    ],
+    vocab: [
+      { w: "gene therapy", d: "a medical treatment that repairs or replaces faulty genes to treat disease" },
+      { w: "genetic", d: "relating to genes, the biological information inherited from parents" },
+      { w: "faulty", d: "not working correctly; having a problem or defect" },
+      { w: "implant", d: "a device or material inserted into the body for medical purposes" },
+      { w: "retina", d: "the layer at the back of the eye that is sensitive to light" },
+      { w: "revolutionary", d: "completely new and likely to change the way things are done" },
+      { w: "reverse", d: "to change something to the opposite direction or condition" },
+      { w: "breakthrough", d: "an important discovery or development that solves a problem" },
+      { w: "participant", d: "a person who takes part in an activity, experiment or study" },
+      { w: "innovation", d: "the introduction of new ideas, methods or inventions" },
+      { w: "previously", d: "before the time being referred to; earlier" },
+      { w: "turning point", d: "a time when an important change happens" }
+    ],
+    opinion: [
+      { prompt: "Gene therapy can now treat conditions that were previously impossible to cure. Do you think all patients should have access to these treatments, regardless of cost?", tip: "Use <strong>Relative Clauses</strong>: 'Patients who cannot afford treatment...' / 'Countries where healthcare is free...' / 'Technologies which were once considered impossible...'" },
+      { prompt: "The article says that medical experts believe these technologies came too late for some patients. Do you agree that medical research should be faster?", tip: "Use <strong>Modal Deduction</strong>: 'The researchers must have worked for years on this...' / 'The results can't have surprised everyone...' / 'These treatments might have been approved sooner if...'" },
+      { prompt: "If a cure for a serious condition in your family had been discovered ten years earlier, how might things have been different?", tip: "Use the <strong>Third Conditional</strong>: 'If this treatment had been available earlier, my family would have...' / 'If scientists had discovered this sooner, many patients might have...'" }
+    ]
+  },
+  {
+    topic: "Technology & Science",
+    level: "B1+ Intermediate",
+    source: "Adapted from ScienceDaily & Phys.org, 2025–2026",
+    title: "Artificial Intelligence Is Changing Medical Research",
+    intro: "Scientists are increasingly using artificial intelligence to speed up research and discover new medical treatments. The results are impressive.",
+    body: [
+      "Scientists around the world are using artificial intelligence (AI) to transform medical research. In 2025 and 2026, AI has helped researchers analyse enormous amounts of data in a fraction of the time it would take humans to do the same work.",
+      "One of the most exciting developments has been the use of AI to discover new medicines. Traditionally, finding a new drug takes between ten and fifteen years and costs hundreds of millions of dollars. AI systems can now scan millions of chemical compounds and predict which ones are likely to work as medicines — in days rather than years.",
+      "AI has also been used to analyse satellite data. In 2026, an international team of scientists used AI and 35 years of satellite images to understand the scale of environmental destruction in some of the world's most important ecosystems. The team said the results were shocking.",
+      "Not everyone is optimistic about AI in science, however. Some researchers worry that AI systems might make errors that human scientists would not make. They argue that AI must be used carefully and that human experts must always check the results. The technology, they say, should assist scientists — not replace them.",
+      "If AI had been available to researchers fifty years ago, the history of medicine would have been very different. Many diseases which still have no cure might have been solved long ago. The potential is enormous, but so is the responsibility to use it wisely."
+    ],
+    tf: [
+      { s: "Finding a new drug traditionally takes between ten and fifteen years.", ans: true, just: "The article states that 'traditionally, finding a new drug takes between ten and fifteen years'." },
+      { s: "AI systems can now discover new drugs in months rather than years.", ans: false, just: "The article says AI can do this 'in days rather than years', not months." },
+      { s: "An international team used AI to analyse 35 years of satellite images.", ans: true, just: "The article says 'an international team of scientists used AI and 35 years of satellite images'." },
+      { s: "All scientists agree that AI should completely replace human researchers.", ans: false, just: "The article says some researchers argue that AI 'should assist scientists — not replace them'." },
+      { s: "The satellite research team described their results as shocking.", ans: true, just: "The article says 'the team said the results were shocking'." },
+      { s: "The article suggests that AI in medicine has no risks or disadvantages.", ans: false, just: "The article mentions researchers who 'worry that AI systems might make errors' and says AI must be used 'carefully' and 'wisely'." }
+    ],
+    vocab: [
+      { w: "artificial intelligence", d: "computer systems able to perform tasks that normally require human intelligence" },
+      { w: "analyse", d: "to examine something carefully in order to understand it" },
+      { w: "compound", d: "a substance made of two or more chemical elements combined" },
+      { w: "predict", d: "to say what you think will happen in the future" },
+      { w: "ecosystem", d: "a biological community of organisms living together in an environment" },
+      { w: "destruction", d: "the act of damaging something so badly that it cannot exist or be used" },
+      { w: "optimistic", d: "hopeful and confident about the future" },
+      { w: "potential", d: "qualities that exist and can be developed in the future" },
+      { w: "responsibility", d: "the state of being the person who must deal with something" },
+      { w: "traditional", d: "following older and more established customs and methods" },
+      { w: "wisely", d: "in a way that shows good judgement and experience" },
+      { w: "fraction", d: "a very small part or amount of something" }
+    ],
+    opinion: [
+      { prompt: "The article says AI can discover new medicines much faster than humans. Do you think AI should be trusted to make important medical decisions?", tip: "Use <strong>Modal Deduction</strong>: 'AI systems must be very powerful if they can...' / 'Scientists can't fully trust AI yet because...' / 'AI might eventually replace some roles, but...'" },
+      { prompt: "Some researchers argue that AI should assist scientists but never replace them. Do you agree?", tip: "Use <strong>Non-defining Relative Clauses</strong>: 'AI, which has already transformed many industries, could also...' / 'Researchers, who have spent years studying this, argue that...'" },
+      { prompt: "The article ends by saying: 'If AI had been available fifty years ago, the history of medicine would have been very different.' Can you continue this thought with your own ideas?", tip: "Continue with the <strong>Third Conditional</strong>: 'If AI had existed fifty years ago, scientists would have...' / 'Many diseases which still affect millions of people might have been cured if...' / 'If researchers had had access to these tools, they could have...'" }
+    ]
+  }
+];
+
+var _curArticle = 0;
+var _curVocab = 0;
+var _curTF = 0;
+var _curOpinion = 0;
+var _tfState = [{answered:[], correct:0}, {answered:[], correct:0}, {answered:[], correct:0}];
+
+function renderArticle(idx) {
+  var a = _articles[idx];
+  var html = '<div class="article-meta">' +
+    '<span class="tag tag-topic">' + a.topic + '</span>' +
+    '<span class="tag tag-level">' + a.level + '</span>' +
+    '<span class="tag tag-source">' + a.source + '</span>' +
+    '</div>' +
+    '<div class="article-title">' + a.title + '</div>' +
+    '<div class="article-intro">' + a.intro + '</div>' +
+    '<div class="article-body">' +
+    a.body.map(function(p) { return '<p>' + p + '</p>'; }).join('') +
+    '</div>' +
+    '<div class="source-note">This article has been adapted and simplified from authentic news sources for language learning purposes at B1+ level.</div>';
+  document.getElementById('articleDisplay').innerHTML = html;
+}
+
+function selectArticle(idx, btn) {
+  _curArticle = idx;
+  document.querySelectorAll('#read .article-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderArticle(idx);
+}
+
+function renderVocab(idx) {
+  var vocab = _articles[idx].vocab;
+  document.getElementById('vocabDisplay').innerHTML = vocab.map(function(v) {
+    return '<div class="gloss-item"><div class="gloss-word">' + v.w + '</div><div class="gloss-def">' + v.d + '</div></div>';
+  }).join('');
+}
+
+function selectVocab(idx, btn) {
+  _curVocab = idx;
+  document.querySelectorAll('#vocab .article-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderVocab(idx);
+}
+
+function renderTF(idx) {
+  var tf = _articles[idx].tf;
+  var state = _tfState[idx];
+  var totalAnswered = state.answered.length;
+  var totalQ = tf.length;
+  document.getElementById('tfScore').textContent = state.correct + ' / ' + totalQ;
+  document.getElementById('tfFill').style.width = (state.correct / totalQ * 100) + '%';
+
+  document.getElementById('tfDisplay').innerHTML = tf.map(function(item, i) {
+    var answered = state.answered.indexOf(i) !== -1;
+    var wasCorrect = answered && ((item.ans === true && state['choice_'+idx+'_'+i] === 'true') || (item.ans === false && state['choice_'+idx+'_'+i] === 'false'));
+    var disabledClass = answered ? ' disabled' : '';
+    var trueCorrect = answered && item.ans === true ? ' correct' : (answered && item.ans === false && state['choice_'+idx+'_'+i] === 'true' ? ' wrong' : '');
+    var falseCorrect = answered && item.ans === false ? ' correct' : (answered && item.ans === true && state['choice_'+idx+'_'+i] === 'false' ? ' wrong' : '');
+    var fbHtml = answered ? ('<div class="tf-feedback ' + (wasCorrect ? 'ok' : 'no') + '">' + (wasCorrect ? 'Correct.' : 'Incorrect.') + '</div><div class="tf-justification">' + item.just + '</div>') : '<div class="tf-feedback"></div>';
+    return '<div class="tf-item" id="tfi_' + idx + '_' + i + '">' +
+      '<div class="tf-statement">' + (i+1) + '. ' + item.s + '</div>' +
+      '<div class="tf-btns">' +
+      '<button class="tf-btn true-btn' + trueCorrect + disabledClass + '" onclick="answerTF(' + idx + ',' + i + ',true)">True</button>' +
+      '<button class="tf-btn false-btn' + falseCorrect + disabledClass + '" onclick="answerTF(' + idx + ',' + i + ',false)">False</button>' +
+      '</div>' + fbHtml + '</div>';
+  }).join('');
+}
+
+function selectTF(idx, btn) {
+  _curTF = idx;
+  document.querySelectorAll('#truefalse .article-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderTF(idx);
+}
+
+function answerTF(artIdx, qIdx, chosen) {
+  var state = _tfState[artIdx];
+  if (state.answered.indexOf(qIdx) !== -1) return;
+  state.answered.push(qIdx);
+  state['choice_' + artIdx + '_' + qIdx] = chosen ? 'true' : 'false';
+  var correct = _articles[artIdx].tf[qIdx].ans === chosen;
+  if (correct) state.correct++;
+  renderTF(artIdx);
+  updateProgress();
+}
+
+function resetTF() {
+  _tfState[_curTF] = { answered: [], correct: 0 };
+  renderTF(_curTF);
+  updateProgress();
+}
+
+function renderOpinion(idx) {
+  var a = _articles[idx];
+  var html = '<div style="background:var(--light);border-radius:7px;padding:.8rem 1rem;margin-bottom:1rem;font-size:.83rem;color:var(--accent);font-weight:600;">' +
+    'Article: ' + a.title + '</div>' +
+    a.opinion.map(function(q, i) {
+      return '<div class="opinion-prompt"><strong>Question ' + (i+1) + ':</strong> ' + q.prompt + '</div>' +
+        '<div class="grammar-tip" style="margin-bottom:.4rem;">' + q.tip + '</div>' +
+        '<textarea class="writing-area" id="op_' + idx + '_' + i + '" placeholder="Write your answer here..." oninput="ccOp(' + idx + ',' + i + ')"></textarea>' +
+        '<div class="char-count" id="opc_' + idx + '_' + i + '">0 characters</div>';
+    }).join('<br>');
+  document.getElementById('opinionDisplay').innerHTML = html;
+}
+
+function selectOpinion(idx, btn) {
+  _curOpinion = idx;
+  document.querySelectorAll('#opinion .article-pill').forEach(function(b) { b.classList.remove('active'); });
+  btn.classList.add('active');
+  renderOpinion(idx);
+}
+
+function ccOp(idx, i) {
+  var ta = document.getElementById('op_' + idx + '_' + i);
+  document.getElementById('opc_' + idx + '_' + i).textContent = ta.value.length + ' characters';
+}
+
+function updateProgress() {
+  var total = 0;
+  _tfState.forEach(function(s) { total += s.correct; });
+  document.getElementById('bigScore').textContent = total;
+  var detail = '';
+  _articles.forEach(function(a, i) {
+    var s = _tfState[i];
+    var pct = s.answered.length === 0 ? 'Not started' : s.correct + ' / ' + a.tf.length + ' correct (' + s.answered.length + ' answered)';
+    detail += '<div style="padding:.4rem 0;border-bottom:1px solid var(--border);">' +
+      '<strong>' + a.title + '</strong> — ' + pct + '</div>';
+  });
+  document.getElementById('progressDetail').innerHTML = detail || 'No activity yet. Start reading and answering!';
+}
+
+function Tab(id, btn) {
+  document.querySelectorAll('section').forEach(function(s) { s.classList.remove('active'); });
+  document.querySelectorAll('.tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  document.getElementById(id).classList.add('active');
+  btn.classList.add('active');
+}
+
+// Init
+renderArticle(0);
+renderVocab(0);
+renderTF(0);
+renderOpinion(0);
+updateProgress();
+</script>
+</body>
+</html>
