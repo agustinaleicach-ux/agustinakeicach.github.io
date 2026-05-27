@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Premios Carlos Alberto Gaume 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #003B8F;
+            --primary-medium: #1B5FB0;
+            --primary-light: #00A8E1;
+            --accent: #FF6B5B;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8a7a 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary-medium);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .article-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .article-date {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .article-content h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .article-content h3 {
+            color: var(--primary-medium);
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .article-content p {
+            margin-bottom: 1rem;
+            text-align: justify;
+            line-height: 1.8;
+        }
+
+        .info-box {
+            background-color: #fff3e0;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 5px;
+        }
+
+        .info-box strong {
+            color: var(--primary-dark);
+        }
+
+        .founder-box {
+            background-color: #fce4ec;
+            border-left: 4px solid var(--accent);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .founder-box h3 {
+            color: var(--accent);
+            margin-top: 0;
+        }
+
+        .award-categories {
+            background-color: #f3e5f5;
+            padding: 2rem;
+            border-radius: 8px;
+            border-left: 4px solid #9c27b0;
+            margin: 2rem 0;
+        }
+
+        .award-categories h2 {
+            color: #6a1b9a;
+            border-left-color: #9c27b0;
+            margin-top: 0;
+        }
+
+        .category {
+            background-color: var(--white);
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-radius: 5px;
+            border-left: 4px solid var(--accent);
+        }
+
+        .category h4 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+            font-size: 1.1rem;
+        }
+
+        .category p {
+            margin: 0;
+            color: #555;
+        }
+
+        .requirements {
+            background-color: #e3f2fd;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid var(--primary-light);
+            margin: 2rem 0;
+        }
+
+        .requirements h3 {
+            color: var(--primary-dark);
+            margin-top: 0;
+        }
+
+        .requirements ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .requirements li {
+            margin-bottom: 0.8rem;
+        }
+
+        .prize-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-left: 4px solid #fbc02d;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+        }
+
+        .prize-box h3 {
+            color: #f57f17;
+            margin-top: 0;
+        }
+
+        .prize-box ul {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .prize-box li {
+            margin-bottom: 0.8rem;
+            font-weight: 500;
+        }
+
+        .process-box {
+            background-color: #e8f5e9;
+            padding: 1.5rem;
+            border-radius: 8px;
+            border-left: 4px solid #4caf50;
+            margin: 2rem 0;
+        }
+
+        .process-box h3 {
+            color: #2e7d32;
+            margin-top: 0;
+        }
+
+        .process-box ol {
+            list-style-position: inside;
+            margin-left: 1rem;
+        }
+
+        .process-box li {
+            margin-bottom: 0.8rem;
+        }
+
+        .message-box {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏆 Noticia</h1>
+        <p>Instituto Cambridge - Comisiones 2026</p>
+    </header>
+
+    <main>
+        <a href="index.html#noticias" class="back-button">← Volver a Noticias</a>
+
+        <div class="article-container">
+            <img src="premios-gaume-2025-mejorado.jpg" alt="Ganadores Premios Gaume 2025" class="article-image">
+
+            <div class="article-date">📅 A partir de 2025</div>
+            
+            <h1 class="article-title">Premios Carlos Alberto Gaume 2025</h1>
+            
+            <p class="article-subtitle">Honrando la excelencia académica y la memoria de nuestro fundador</p>
+
+            <div class="article-content">
+                <h2>Acerca del Premio Gaume</h2>
+                <p>A partir de 2025, el Instituto Cambridge instituye los Premios Carlos Alberto Gaume como reconocimiento permanente a la memoria de la figura del fundador de nuestra institución. Este premio representa el compromiso del Instituto con la excelencia académica y el legado de calidad educativa que Carlos Alberto Gaume dejó en la comunidad.</p>
+
+                <div class="founder-box">
+                    <h3>🎓 Carlos Alberto Gaume - Fundador</h3>
+                    <p>Carlos Alberto Gaume fue el visionario que fundó el Instituto Cambridge con la misión de brindar educación de calidad en el idioma inglés. Su dedicación a la excelencia académica y su compromiso con la formación integral de estudiantes siguen siendo los pilares de nuestra institución.</p>
+                </div>
+
+                <h2>Criterios de Selección</h2>
+                <div class="requirements">
+                    <h3>Requisitos para optar al premio:</h3>
+                    <ul>
+                        <li><strong>Nivel académico:</strong> Estudiantes de nivel <strong>Superior o Teens 6</strong></li>
+                        <li><strong>Desempeño oral:</strong> Excelencia demostrada en habilidades de expresión oral</li>
+                        <li><strong>Desempeño escrito:</strong> Excelencia demostrada en habilidades de producción escrita</li>
+                        <li><strong>Mérito integral:</strong> Desempeño destacado en todas las áreas del idioma inglés</li>
+                    </ul>
+                </div>
+
+                <h2>Selección de Ganadores</h2>
+                <p>Los ganadores serán seleccionados por un <strong>comité de docentes presidido por los miembros del equipo de vicedirección</strong>. Este comité está compuesto por profesionales con amplia experiencia en evaluación académica y conocimiento profundo del desempeño estudiantil.</p>
+
+                <div class="award-categories">
+                    <h2>Las Tres Categorías</h2>
+                    <p style="margin-bottom: 1.5rem;">Se otorgarán tres premios anuales, uno en cada categoría:</p>
+
+                    <div class="category">
+                        <h4>🎓 Categoría 1: Alumno Regular del Instituto</h4>
+                        <p>Reconocimiento a un estudiante regular del Instituto Cambridge que se haya destacado en su desempeño oral y escrito.</p>
+                    </div>
+
+                    <div class="category">
+                        <h4>👨‍🏫 Categoría 2: Presentado por una Docente Matriculada</h4>
+                        <p>Premio para un estudiante presentado por una docente que esté matriculada en el Instituto Cambridge y que considere que su alumno merece este reconocimiento excepcional.</p>
+                    </div>
+
+                    <div class="category">
+                        <h4>📚 Categoría 3: Estudiante de una Comisión</h4>
+                        <p>Distinción para un estudiante proveniente de una Comisión del Instituto que haya demostrado excelencia en su desempeño académico.</p>
+                    </div>
+                </div>
+
+                <h2>El Premio</h2>
+                <div class="prize-box">
+                    <h3>🎁 ¿Qué se gana?</h3>
+                    <ul>
+                        <li><strong>Beca total</strong> para cualquier curso de nivel avanzado del Instituto</li>
+                        <li><strong>Acceso a preparatorios</strong> de exámenes internacionales</li>
+                        <li><strong>Flexibilidad de modalidad</strong>: presencial, semi-presencial u online</li>
+                        <li><strong>Elección de carga horaria:</strong> según conveniencia del estudiante</li>
+                        <li><strong>Material de estudio incluido</strong> en la beca</li>
+                    </ul>
+                </div>
+
+                <h2>Proceso de Selección</h2>
+                <div class="process-box">
+                    <h3>Pasos del proceso:</h3>
+                    <ol>
+                        <li>Los docentes y coordinadores proponen candidatos que cumplan con los criterios</li>
+                        <li>El comité de vicedirección analiza los expedientes académicos</li>
+                        <li>Se evalúa el desempeño oral y escrito de cada candidato</li>
+                        <li>Se seleccionan los tres ganadores según mérito académico</li>
+                        <li>Se comunica la decisión a los ganadores y sus docentes</li>
+                        <li>Se realiza una ceremonia oficial de premiación</li>
+                    </ol>
+                </div>
+
+                <h2>Impacto en Nuestros Estudiantes</h2>
+                <p>Los Premios Gaume representan más que un reconocimiento académico: son un testimonio del compromiso del Instituto Cambridge con la excelencia y la superación personal. Para los ganadores, esta beca abre nuevas oportunidades de desarrollo profesional en idioma inglés, permitiéndoles acceder a cursos avanzados y preparación para exámenes internacionales que enriquecen sus competencias lingüísticas.</p>
+
+                <div class="message-box">
+                    <p>"Los Premios Carlos Alberto Gaume celebran no solo la excelencia académica, sino también el espíritu de dedicación y pasión por el aprendizaje que caracterizaba a nuestro fundador. Estos premios son un puente entre el legado del pasado y las oportunidades del futuro de nuestros estudiantes más destacados."</p>
+                    <p style="margin-top: 1rem;">— Instituto Cambridge</p>
+                </div>
+
+                <h2>¿Quieres ser Ganador del Premio Gaume?</h2>
+                <div class="info-box">
+                    <p><strong>Si eres estudiante de Superior o Teens 6:</strong></p>
+                    <p style="margin-bottom: 0;">Demuestra tu excelencia en desempeño oral y escrito, participa activamente en clase, cumple con dedicación todas tus tareas y trabajo. El comité estará observando a estudiantes que destaquen por su mérito académico integral.</p>
+                </div>
+
+                <h2>Contacto e Información</h2>
+                <p>Para más información sobre los Premios Gaume o si deseas proponer un candidato:</p>
+                <div class="info-box">
+                    <p><strong>📧 Email:</strong> info@cambridge.com.ar</p>
+                    <p><strong>📞 Teléfono:</strong> 11 4371 9904</p>
+                    <p><strong>📍 Dirección:</strong> Tucumán 1483, Buenos Aires, CABA</p>
+                </div>
+
+                <div style="text-align: center; margin-top: 2rem;">
+                    <a href="ganadores-premios-gaume-2025.html" style="display: inline-block; padding: 1rem 2rem; background-color: var(--accent); color: white; text-decoration: none; border-radius: 5px; font-weight: bold; font-size: 1.1rem;">Ver Ganadores 2025 →</a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Instituto Cambridge - Comisiones</p>
+        <p>Excelencia en educación del idioma inglés</p>
+    </footer>
+</body>
+</html>
