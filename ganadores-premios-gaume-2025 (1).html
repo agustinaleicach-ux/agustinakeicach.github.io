@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ganadores Premios Carlos Alberto Gaume 2025</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #003B8F;
+            --primary-medium: #1B5FB0;
+            --primary-light: #00A8E1;
+            --accent: #FF6B5B;
+            --gold: #FFD700;
+            --silver: #C0C0C0;
+            --bronze: #CD7F32;
+            --white: #FFFFFF;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.8;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--accent) 0%, #ff8a7a 100%);
+            color: var(--white);
+            padding: 2rem;
+            text-align: center;
+        }
+
+        header h1 {
+            font-size: 2.2rem;
+            margin-bottom: 0.5rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        .back-button {
+            display: inline-block;
+            margin-bottom: 2rem;
+            padding: 0.7rem 1.5rem;
+            background-color: var(--primary-medium);
+            color: var(--white);
+            text-decoration: none;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: background-color 0.3s;
+        }
+
+        .back-button:hover {
+            background-color: var(--primary-dark);
+        }
+
+        .article-container {
+            background: var(--white);
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .article-image {
+            width: 100%;
+            max-height: 400px;
+            object-fit: cover;
+            margin-bottom: 2rem;
+            border-radius: 8px;
+        }
+
+        .article-date {
+            color: var(--accent);
+            font-weight: bold;
+            font-size: 0.95rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .article-title {
+            color: var(--primary-dark);
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            line-height: 1.3;
+        }
+
+        .article-subtitle {
+            color: #666;
+            font-size: 1.1rem;
+            font-style: italic;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid var(--accent);
+        }
+
+        .article-content h2 {
+            color: var(--primary-dark);
+            font-size: 1.4rem;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            border-left: 4px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .announcement-box {
+            background: linear-gradient(135deg, #fff9c4 0%, #fff59d 100%);
+            border-left: 4px solid #fbc02d;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+            font-size: 1.1rem;
+            font-weight: 500;
+        }
+
+        .ceremony-info {
+            background-color: #e3f2fd;
+            border-left: 4px solid var(--primary-light);
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin: 2rem 0;
+            text-align: center;
+        }
+
+        .ceremony-info h3 {
+            color: var(--primary-dark);
+            margin-bottom: 0.5rem;
+        }
+
+        .ceremony-info p {
+            margin: 0.3rem 0;
+            font-size: 1rem;
+        }
+
+        .prizes-section {
+            margin: 3rem 0;
+        }
+
+        .prize-category {
+            margin-bottom: 3rem;
+        }
+
+        .prize-header {
+            padding: 1rem;
+            color: var(--white);
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin-bottom: 0;
+        }
+
+        .prize-header.first {
+            background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            color: #333;
+        }
+
+        .prize-header.second {
+            background: linear-gradient(135deg, #C0C0C0 0%, #A9A9A9 100%);
+            color: #333;
+        }
+
+        .prize-header.third {
+            background: linear-gradient(135deg, #CD7F32 0%, #B8860B 100%);
+        }
+
+        .winners-container {
+            background: var(--white);
+            border: 2px solid #ddd;
+            border-top: none;
+            border-radius: 0 0 8px 8px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .prize-description {
+            background-color: #f5f5f5;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1.5rem;
+            font-weight: 500;
+            color: var(--primary-dark);
+        }
+
+        .winner {
+            background-color: #fafafa;
+            padding: 1.5rem;
+            margin: 1rem 0;
+            border-left: 4px solid var(--primary-light);
+            border-radius: 5px;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .winner-icon {
+            font-size: 2rem;
+            min-width: 50px;
+            text-align: center;
+        }
+
+        .winner-info h4 {
+            color: var(--primary-dark);
+            margin: 0 0 0.3rem 0;
+            font-size: 1.1rem;
+        }
+
+        .winner-info p {
+            margin: 0.2rem 0;
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .winner-info .category {
+            color: var(--primary-medium);
+            font-weight: 500;
+            font-size: 0.9rem;
+        }
+
+        .message-box {
+            background-color: #f1f8e9;
+            border-left: 4px solid #4caf50;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            font-style: italic;
+        }
+
+        .footer-text {
+            background-color: #f5f5f5;
+            padding: 1.5rem;
+            border-radius: 8px;
+            margin-top: 2rem;
+            text-align: center;
+        }
+
+        footer {
+            background-color: var(--primary-dark);
+            color: var(--white);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 3rem;
+            border-radius: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .article-title {
+                font-size: 1.5rem;
+            }
+
+            .winner {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .winner-icon {
+                font-size: 2.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>🏆 Ganadores 2025</h1>
+        <p>Premios Carlos Alberto Gaume</p>
+    </header>
+
+    <main>
+        <a href="index.html#noticias" class="back-button">← Volver a Noticias</a>
+
+        <div class="article-container">
+            <img src="premios-gaume-2025-mejorado.jpg" alt="Ganadores Premios Gaume 2025" class="article-image">
+
+            <div class="article-date">📅 2025</div>
+            
+            <h1 class="article-title">Ganadores de los Premios Carlos Alberto Gaume 2025</h1>
+            
+            <p class="article-subtitle">Honrando la excelencia académica de estudiantes destacados</p>
+
+            <div class="announcement-box">
+                <p>La Dirección del Instituto Cambridge tiene el agrado de anunciar a los ganadores del Premio Carlos Alberto Gaume en las diferentes categorías</p>
+            </div>
+
+            <div class="ceremony-info">
+                <h3>📍 Ceremonia de Premiación</h3>
+                <p><strong>Fecha:</strong> Sábado 28 de marzo, 2025</p>
+                <p><strong>Hora:</strong> 14:30 horas</p>
+                <p><strong>Lugar:</strong> Instituto Cambridge</p>
+            </div>
+
+            <div class="article-content">
+                <h2>🥇 Primer Premio - Beca Completa</h2>
+                <div class="winners-container">
+                    <div class="prize-description">
+                        💰 <strong>Beca completa para cursar First Certificate (online o presencial)</strong>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">👑</div>
+                        <div class="winner-info">
+                            <h4>Verónica Mops</h4>
+                            <p class="category">Alumna Regular del Instituto</p>
+                            <p>Desempeño excepcional en exámenes finales 2025</p>
+                        </div>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">👑</div>
+                        <div class="winner-info">
+                            <h4>Juan Manuel Pardo Sánchez</h4>
+                            <p class="category">Comisión 33 - Leader English School</p>
+                            <p>Excelencia académica demostrada</p>
+                        </div>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">👑</div>
+                        <div class="winner-info">
+                            <h4>Patricia Argañaraz</h4>
+                            <p class="category">Alumna Libre - Docente Alvarez, Stella Maris</p>
+                            <p>Desempeño oral y escrito sobresaliente</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>🥈 Segundo Premio - Media Beca</h2>
+                <div class="winners-container">
+                    <div class="prize-description">
+                        💰 <strong>Media beca para cursar First Certificate (online o presencial)</strong>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">⭐</div>
+                        <div class="winner-info">
+                            <h4>Sebastián Cid</h4>
+                            <p class="category">Alumno Regular del Instituto</p>
+                            <p>Desempeño distinguido en exámenes finales</p>
+                        </div>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">⭐</div>
+                        <div class="winner-info">
+                            <h4>Geraldine Micaela Machado</h4>
+                            <p class="category">Comisión 145 - Abbey Road School of English</p>
+                            <p>Excelencia en desempeño académico</p>
+                        </div>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">⭐</div>
+                        <div class="winner-info">
+                            <h4>Melisa Molina</h4>
+                            <p class="category">Alumna Libre - Docente Coronel Mabel</p>
+                            <p>Desempeño destacado en pruebas finales</p>
+                        </div>
+                    </div>
+                </div>
+
+                <h2>🥉 Tercer Premio - Materiales Gratuitos</h2>
+                <div class="winners-container">
+                    <div class="prize-description">
+                        📚 <strong>Student's Book y Workbook sin cargo para cursar First Certificate</strong>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">✨</div>
+                        <div class="winner-info">
+                            <h4>Dulce Caterina Trinidad</h4>
+                            <p class="category">Comisión 184 - Docente Alicia Mercau</p>
+                            <p>Destacado desempeño académico</p>
+                        </div>
+                    </div>
+
+                    <div class="winner">
+                        <div class="winner-icon">✨</div>
+                        <div class="winner-info">
+                            <h4>Valentina Caballero</h4>
+                            <p class="category">Alumna Regular del Instituto</p>
+                            <p>Excelencia demostrada en exámenes finales</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-box">
+                    <p>"Felicitamos a todos nuestros ganadores. Su dedicación, esfuerzo y excelencia académica son un reflejo de los valores que el Instituto Cambridge promueve: la búsqueda constante de la excelencia y el compromiso con la educación de calidad. Los premios que hoy reciben son un reconocimiento a su mérito y una motivación para continuar creciendo académicamente."</p>
+                    <p style="margin-top: 1rem;">— Dirección del Instituto Cambridge</p>
+                </div>
+
+                <h2>Criterios de Selección</h2>
+                <p>Los ganadores fueron seleccionados por un comité de docentes, presidido por los miembros del equipo de vicedirección, considerando:</p>
+                <div class="footer-text">
+                    <p>✅ <strong>Desempeño excepcional</strong> en exámenes finales 2025</p>
+                    <p>✅ <strong>Habilidades orales</strong> destacadas</p>
+                    <p>✅ <strong>Habilidades escritas</strong> sobresalientes</p>
+                    <p>✅ <strong>Compromiso integral</strong> con el aprendizaje del idioma inglés</p>
+                </div>
+
+                <h2>Importancia de estos Premios</h2>
+                <p>Los Premios Carlos Alberto Gaume representan el reconocimiento a la excelencia académica y honran la memoria de nuestro fundador. Para los ganadores, estos premios abren las puertas a nuevas oportunidades de formación avanzada en idioma inglés, permitiéndoles continuar su desarrollo profesional y académico a través de la preparación de exámenes internacionales de prestigio como el First Certificate.</p>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Instituto Cambridge - Comisiones</p>
+        <p>Excelencia en educación del idioma inglés</p>
+    </footer>
+</body>
+</html>
