@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Teens 6 — News Activities 2025/2026</title>
+<style>
+  :root{--accent:#4C1D95;--light:#F5F3FF;--border:#E9ECEF;--text:#1A1A2E;--muted:#6C757D;--green:#2D9B6F;--red:#DC3545;--surface:#FFFFFF;--bg:#F8F9FA;}
+  *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+  body{font-family:'Inter',system-ui,sans-serif;background:var(--bg);color:var(--text);line-height:1.65;}
+  .page-header{background:var(--accent);padding:2.2rem 2rem 1.8rem;}
+  .header-inner{max-width:920px;margin:0 auto;}
+  .header-label{display:inline-block;background:rgba(255,255,255,.15);color:rgba(255,255,255,.9);font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;padding:.25rem .75rem;border-radius:4px;margin-bottom:.65rem;}
+  .header-title{font-size:clamp(1.6rem,3.5vw,2.4rem);font-weight:700;color:#fff;line-height:1.15;letter-spacing:-.02em;}
+  .header-sub{color:rgba(255,255,255,.72);font-size:.85rem;margin-top:.35rem;}
+  .tab-nav{background:var(--surface);border-bottom:1px solid var(--border);position:sticky;top:0;z-index:20;}
+  .tab-nav-inner{max-width:920px;margin:0 auto;display:flex;overflow-x:auto;}
+  .tab-btn{font-family:inherit;font-size:.8rem;font-weight:600;letter-spacing:.03em;padding:.85rem 1.1rem;border:none;background:none;color:var(--muted);cursor:pointer;white-space:nowrap;border-bottom:2px solid transparent;transition:color .15s,border-color .15s;}
+  .tab-btn:hover{color:var(--text);} .tab-btn.active{color:var(--accent);border-bottom-color:var(--accent);}
+  .main{max-width:920px;margin:0 auto;padding:2rem 1.5rem 4rem;}
+  section{display:none;} section.active{display:block;}
+  .card{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.75rem;margin-bottom:1.25rem;}
+  .card-title{font-size:1rem;font-weight:700;color:var(--text);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+  .card-title::before{content:'';display:inline-block;width:3px;height:1rem;background:var(--accent);border-radius:2px;}
+  .article-meta{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1rem;}
+  .tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.2rem .65rem;border-radius:4px;}
+  .tag-topic{background:var(--light);color:var(--accent);}
+  .tag-level{background:#ECFDF5;color:#065F46;}
+  .tag-source{background:#FEF3C7;color:#92400E;}
+  .article-title{font-size:1.2rem;font-weight:700;color:var(--text);margin-bottom:.5rem;line-height:1.3;}
+  .article-intro{font-size:.88rem;color:var(--muted);margin-bottom:1.1rem;font-style:italic;}
+  .article-body{font-size:.92rem;color:#2D2D2D;line-height:1.85;}
+  .article-body p{margin-bottom:.9rem;} .article-body p:last-child{margin-bottom:0;}
+  .source-note{font-size:.76rem;color:var(--muted);border-top:1px solid var(--border);padding-top:.75rem;margin-top:1.1rem;}
+  .article-pills{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:1.25rem;}
+  .article-pill{font-family:inherit;font-size:.8rem;font-weight:600;padding:.4rem 1rem;border:2px solid var(--border);border-radius:99px;background:var(--surface);cursor:pointer;transition:all .15s;color:var(--muted);}
+  .article-pill.active{background:var(--accent);color:#fff;border-color:var(--accent);}
+  .article-pill:hover:not(.active){border-color:var(--accent);color:var(--accent);}
+  .glossary-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(195px,1fr));gap:.6rem;margin-top:.5rem;}
+  .gloss-item{background:var(--light);border:1px solid rgba(0,0,0,.07);border-radius:7px;padding:.75rem .9rem;}
+  .gloss-word{font-size:.85rem;font-weight:700;color:var(--accent);}
+  .gloss-def{font-size:.76rem;color:var(--muted);margin-top:.2rem;line-height:1.4;}
+  .tf-item{border:1px solid var(--border);border-radius:8px;padding:1.1rem;margin-bottom:.85rem;}
+  .tf-statement{font-size:.9rem;font-weight:600;color:var(--text);margin-bottom:.75rem;line-height:1.5;}
+  .tf-btns{display:flex;gap:.5rem;}
+  .tf-btn{font-family:inherit;font-size:.82rem;font-weight:600;padding:.4rem 1.1rem;border:1.5px solid var(--border);border-radius:5px;background:var(--surface);cursor:pointer;transition:all .15s;}
+  .tf-btn.true-btn:hover{border-color:#2D9B6F;background:#ECFDF5;color:#065F46;}
+  .tf-btn.false-btn:hover{border-color:#DC3545;background:#FEE2E2;color:#7F1D1D;}
+  .tf-btn.correct{background:#D1FAE5;border-color:#2D9B6F;color:#065F46;font-weight:700;}
+  .tf-btn.wrong{background:#FEE2E2;border-color:#DC3545;color:#7F1D1D;}
+  .tf-btn.disabled{pointer-events:none;opacity:.6;}
+  .tf-feedback{font-size:.82rem;font-weight:600;margin-top:.6rem;min-height:.9rem;}
+  .tf-feedback.ok{color:var(--green);} .tf-feedback.no{color:var(--red);}
+  .tf-justification{font-size:.79rem;color:var(--muted);margin-top:.3rem;font-style:italic;line-height:1.5;}
+  .score-row{display:flex;align-items:center;gap:1rem;background:var(--light);border:1px solid rgba(0,0,0,.07);border-radius:8px;padding:.85rem 1.1rem;margin-bottom:1.25rem;font-size:.85rem;font-weight:600;color:var(--accent);}
+  .score-bar{flex:1;height:6px;background:rgba(0,0,0,.08);border-radius:3px;overflow:hidden;}
+  .score-fill{height:100%;background:var(--accent);border-radius:3px;transition:width .3s;}
+  .opinion-prompt{background:#FFFBEB;border-left:3px solid #F59E0B;border-radius:0 7px 7px 0;padding:.9rem 1.1rem;margin-bottom:.6rem;font-size:.88rem;line-height:1.6;}
+  .opinion-prompt strong{color:#B45309;}
+  .grammar-tip{background:var(--light);border-radius:7px;padding:.9rem 1.1rem;margin-bottom:.9rem;font-size:.82rem;line-height:1.6;color:#333;}
+  .grammar-tip strong{color:var(--accent);}
+  .writing-area{width:100%;min-height:90px;border:1px solid var(--border);border-radius:6px;padding:.75rem;font-family:inherit;font-size:.88rem;resize:vertical;outline:none;color:var(--text);background:var(--surface);transition:border-color .15s;}
+  .writing-area:focus{border-color:var(--accent);}
+  .char-count{font-size:.72rem;color:var(--muted);margin-top:.2rem;text-align:right;}
+  .overall-score{background:var(--surface);border:1px solid var(--border);border-radius:10px;padding:1.4rem;margin-bottom:1.25rem;text-align:center;}
+  .big-score{font-size:2.5rem;font-weight:700;color:var(--accent);line-height:1;}
+  .big-score-label{font-size:.82rem;color:var(--muted);margin-top:.3rem;}
+  .prog-row{padding:.45rem 0;border-bottom:1px solid var(--border);font-size:.88rem;}
+  .gram-callout{background:var(--light);border-left:3px solid var(--accent);border-radius:0 7px 7px 0;padding:.9rem 1.1rem;margin-top:.5rem;font-size:.83rem;line-height:1.65;color:#333;}
+  .gram-callout strong{color:var(--accent);}
+  .btn-row{display:flex;gap:.6rem;margin-top:1rem;}
+  .btn{font-family:inherit;font-size:.82rem;font-weight:600;padding:.45rem 1.1rem;border-radius:5px;border:none;cursor:pointer;transition:opacity .15s;}
+  .btn:hover{opacity:.85;} .btn-primary{background:var(--accent);color:#fff;}
+  @media(max-width:520px){.glossary-grid{grid-template-columns:1fr 1fr;}.tab-btn{font-size:.75rem;padding:.75rem .85rem;}}
+</style>
+</head>
+<body>
+<header class="page-header">
+  <div class="header-inner">
+    <div class="header-label">Teens 6 · Instituto Cambridge 2026 · B2.1 Advanced (FCE Level)</div>
+    <h1 class="header-title">News Activities</h1>
+    <p class="header-sub">Read real news adapted to your level · True/False · Vocabulary · Opinion</p>
+  </div>
+</header>
+<nav class="tab-nav">
+  <div class="tab-nav-inner">
+    <button class="tab-btn active" onclick="Tab('read',this)">📰 Read</button>
+    <button class="tab-btn" onclick="Tab('vocab',this)">📚 Vocabulary</button>
+    <button class="tab-btn" onclick="Tab('truefalse',this)">✅ True / False</button>
+    <button class="tab-btn" onclick="Tab('opinion',this)">💬 Opinion</button>
+    <button class="tab-btn" onclick="Tab('progress',this)">📊 My Progress</button>
+  </div>
+</nav>
+<main class="main">
+  <section id="read" class="active">
+    <div class="card">
+      <div class="card-title">Choose an article</div>
+      <div class="article-pills"><button class="article-pill active" onclick="selectArticle(0,this)">🤖 AI Bias: When Algorith...</button><button class="article-pill" onclick="selectArticle(1,this)">🌍 The Richest 1% Exhaust...</button><button class="article-pill" onclick="selectArticle(2,this)">✨ The Synthetic Influenc...</button></div>
+      <div id="articleDisplay"></div>
+    </div>
+  </section>
+  <section id="vocab">
+    <div class="card">
+      <div class="card-title">Key Vocabulary</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.75rem;">Vocabulary drawn from the selected article.</p>
+      <div class="article-pills"><button class="article-pill active" onclick="selectVocab(0,this)">🤖 AI Bias: When Algorith...</button><button class="article-pill" onclick="selectVocab(1,this)">🌍 The Richest 1% Exhaust...</button><button class="article-pill" onclick="selectVocab(2,this)">✨ The Synthetic Influenc...</button></div>
+      <div class="glossary-grid" id="vocabDisplay"></div>
+    </div>
+  </section>
+  <section id="truefalse">
+    <div class="card">
+      <div class="card-title">True or False?</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.85rem;">Read the statement. Is it True or False according to the article?</p>
+      <div class="article-pills"><button class="article-pill active" onclick="selectTF(0,this)">🤖 AI Bias: When Algorith...</button><button class="article-pill" onclick="selectTF(1,this)">🌍 The Richest 1% Exhaust...</button><button class="article-pill" onclick="selectTF(2,this)">✨ The Synthetic Influenc...</button></div>
+      <div class="score-row">
+        <span>Score</span>
+        <div class="score-bar"><div class="score-fill" id="tfFill" style="width:0%"></div></div>
+        <span id="tfScore">0 / 6</span>
+      </div>
+      <div id="tfDisplay"></div>
+      <div class="btn-row"><button class="btn btn-primary" onclick="resetTF()">Reset</button></div>
+    </div>
+  </section>
+  <section id="opinion">
+    <div class="card">
+      <div class="card-title">Your Opinion</div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:1rem;">Write your opinion using the grammar structures from <strong>Teens 6</strong>: Advanced Modal Deduction (past), Inversion, Cleft Sentences, Hedging, Subjunctive.</p>
+      <div class="article-pills"><button class="article-pill active" onclick="selectOpinion(0,this)">🤖 AI Bias: When Algorith...</button><button class="article-pill" onclick="selectOpinion(1,this)">🌍 The Richest 1% Exhaust...</button><button class="article-pill" onclick="selectOpinion(2,this)">✨ The Synthetic Influenc...</button></div>
+      <div id="opinionDisplay"></div>
+    </div>
+  </section>
+  <section id="progress">
+    <div class="overall-score">
+      <div class="big-score" id="bigScore">0</div>
+      <div class="big-score-label">Total correct answers across all articles</div>
+    </div>
+    <div class="card">
+      <div class="card-title">Activity Summary</div>
+      <div id="progressDetail" style="font-size:.88rem;color:var(--muted);"></div>
+    </div>
+    <div class="card">
+      <div class="card-title">Grammar Reminder — Teens 6</div>
+      <div class="gram-callout"><strong>Advanced Modals (past):</strong> 'Society must have known this would happen.' / 'Regulators can't have anticipated the scale of the problem.'<br><br>
+<strong>Inversion:</strong> Not only does AI create bias, but it also... / Rarely have we seen such rapid change in the labour market.<br><br>
+<strong>Cleft Sentences:</strong> It is structural inequality, not individual behaviour, that lies at the heart of this problem. / What the data reveals is that...<br><br>
+<strong>Hedging:</strong> It would appear that... / The evidence tends to suggest... / It seems likely that...<br><br>
+<strong>Subjunctive:</strong> It is essential that governments require that companies be held accountable.</div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+var A = [{"topic": "Ethics & Technology", "level": "B2.1 Advanced", "source": "Adapted from PrometAI Blog & Reuters Institute, 2025\u20132026", "title": "AI Bias: When Algorithms Discriminate", "intro": "Artificial intelligence systems are increasingly used to make important decisions about people's lives \u2014 from job applications to medical diagnoses. But growing evidence suggests that many AI systems carry hidden biases that can cause serious harm.", "body": ["AI was once presented as a solution to human bias. Unlike people, it was argued, computers would make decisions based purely on data \u2014 objectively and without prejudice. However, the reality has proved far more complicated. AI systems are only as unbiased as the data on which they are trained, and most historical data reflects the inequalities of the societies that produced it.", "In hiring processes, AI screening tools have been found to silently filter out candidates on the basis of gender or ethnicity \u2014 not because programmers intended this outcome, but because the training data over-represented certain groups as more successful. Amazon, for instance, scrapped an AI recruiting tool in 2018 after discovering it had been systematically downgrading applications from women.", "The consequences extend beyond employment. In the criminal justice system, predictive algorithms used in some US states to assess the risk of reoffending have been shown to systematically overestimate the risk posed by Black defendants. In healthcare, algorithms trained predominantly on data from white patients may perform significantly less accurately when applied to patients from ethnic minority backgrounds.", "Regulation is advancing, but unevenly. The European Union's AI Act, which came into force in 2024 and 2025, introduces strict requirements for high-risk AI systems, including those used in employment and law enforcement. In the United States, progress has been slower, with a patchwork of state-level rules rather than a comprehensive federal framework.", "It would appear that the central challenge is not merely technical but deeply political. Correcting bias in AI systems requires acknowledging the historical inequalities embedded in the data \u2014 and that acknowledgement can itself be controversial. As one researcher put it: the algorithm reflects the society that built it."], "vocab": [{"w": "bias", "d": "an unfair tendency to favour or discriminate against a particular group"}, {"w": "prejudice", "d": "an unreasonable dislike of or preference for a person based on their identity"}, {"w": "systematically", "d": "done in a methodical, organised and repeated way"}, {"w": "embedded", "d": "firmly fixed within something; deeply integrated"}, {"w": "reoffending", "d": "committing a crime again after having already been convicted"}, {"w": "patchwork", "d": "made of many different pieces; lacking coherence or uniformity"}, {"w": "comprehensive", "d": "complete and including all or nearly all aspects of something"}, {"w": "scrutiny", "d": "close and careful examination or investigation"}, {"w": "discriminate", "d": "to treat people unfairly because of their identity or characteristics"}, {"w": "ethnicity", "d": "the fact of belonging to a group with a shared culture and background"}, {"w": "framework", "d": "a basic structure or system for organising information or rules"}, {"w": "acknowledge", "d": "to accept or admit that something is true or exists"}], "tf": [{"s": "The article argues that AI systems make decisions without any form of bias.", "ans": false, "just": "The article clearly states that AI systems are 'only as unbiased as the data on which they are trained' and carries hidden biases."}, {"s": "Amazon discontinued an AI recruiting tool after discovering it was discriminating against women.", "ans": true, "just": "The article states that Amazon 'scrapped an AI recruiting tool in 2018 after discovering it had been systematically downgrading applications from women'."}, {"s": "Predictive algorithms in the US criminal justice system have been found to underestimate the risk posed by Black defendants.", "ans": false, "just": "The article says these algorithms 'systematically overestimate' \u2014 not underestimate \u2014 the risk posed by Black defendants."}, {"s": "The EU's AI Act introduces requirements for high-risk AI systems including those used in employment.", "ans": true, "just": "The article states that the EU's AI Act 'introduces strict requirements for high-risk AI systems, including those used in employment and law enforcement'."}, {"s": "The article suggests that progress on AI regulation has been equally advanced in the EU and the US.", "ans": false, "just": "The article says EU regulation is advancing while 'in the United States, progress has been slower'."}, {"s": "According to the article, correcting AI bias may be controversial because it requires acknowledging historical inequalities.", "ans": true, "just": "The article states that 'correcting bias in AI systems requires acknowledging the historical inequalities embedded in the data \u2014 and that acknowledgement can itself be controversial'."}], "opinion": [{"prompt": "The article argues that AI reflects the society that built it. Do you think it is possible to create truly unbiased AI, or is bias in technology inevitable?", "tip": "Use <strong>Advanced Modals</strong>: 'Truly unbiased AI can't have been the original intention...' / 'Programmers must have known that historical data was skewed.' Use <strong>Cleft Sentences</strong>: 'It is the data, not the algorithm itself, that carries the bias.'"}, {"prompt": "The European Union has introduced strict AI regulation, while the United States has not. Do you think international regulation of AI is necessary?", "tip": "Use <strong>Inversion</strong>: 'Not only does AI bias harm individuals, but it also...' / 'Rarely have we seen a technology with such potential to entrench existing inequalities.' Use <strong>Hedging</strong>: 'It would appear that a global framework would be the most effective solution, though...'"}, {"prompt": "Had AI hiring tools been regulated from the beginning, do you think the gender and racial disparities the article describes would still exist today?", "tip": "Use the <strong>Third Conditional</strong> and <strong>Advanced Modal Deduction</strong>: 'If these tools had been regulated earlier, thousands of candidates should not have been discriminated against.' / 'Had the EU Act existed in 2010, Amazon might not have...'"}]}, {"topic": "Society & Inequality", "level": "B2.1 Advanced", "source": "Adapted from Oxfam Report & Wikipedia 2026 in Climate Change, January 2026", "title": "The Richest 1% Exhaust Their Annual Carbon Budget in Ten Days", "intro": "A January 2026 report from Oxfam revealed a striking statistic: the wealthiest 1% of the global population uses up their entire annual carbon budget within the first ten days of the year. The findings have reignited debate about the relationship between inequality, consumption and climate change.", "body": ["The concept of a carbon budget refers to the total amount of carbon dioxide that can be emitted while still keeping global average temperatures within 1.5 degrees Celsius of pre-industrial levels \u2014 the target set by the Paris Agreement. Oxfam's January 2026 report concluded that the wealthiest 1% of the global population exhausted this entire annual allowance within just ten days of the new year.", "The report highlights a profound asymmetry: while the richest individuals in the world contribute disproportionately to the emissions driving climate change, it is largely the poorest and most vulnerable populations \u2014 in low-income countries least responsible for emissions \u2014 who bear the worst consequences of global warming.", "Private jets, superyachts, and multiple large properties are among the highest-impact lifestyle choices of ultra-wealthy individuals. A single transatlantic private jet flight emits more carbon dioxide than the average person in a low-income country produces in an entire year. Critics argue that voluntary lifestyle changes by the wealthy are insufficient; structural policy change \u2014 such as wealth taxes and frequent flyer levies \u2014 is required.", "The report also points to the role of investment. A significant proportion of the carbon footprint of the wealthiest individuals comes not from their personal consumption but from the emissions generated by the companies they own or in which they invest. This means that traditional measures of individual carbon footprints significantly underestimate the climate impact of the ultra-wealthy.", "It would seem that the debate around climate justice is becoming increasingly prominent. Whereas climate change was once framed primarily as a technical problem requiring engineering solutions, it is now widely discussed as a question of global equity \u2014 who caused it, who suffers most, and who must bear the greatest responsibility for solving it."], "vocab": [{"w": "carbon budget", "d": "the total amount of CO2 that can be emitted while keeping warming within a target"}, {"w": "asymmetry", "d": "a lack of balance or equality between two things"}, {"w": "disproportionately", "d": "to a degree that is too large or too small in comparison to something else"}, {"w": "levy", "d": "a tax or charge imposed by a government or authority"}, {"w": "equity", "d": "the quality of being fair and impartial; fairness in distribution"}, {"w": "emit", "d": "to release or send out something such as gas, light or sound"}, {"w": "vulnerable", "d": "exposed to the possibility of harm; in a weak or unprotected position"}, {"w": "prominent", "d": "important and well-known; standing out from others"}, {"w": "structural", "d": "relating to the basic organisation or system, rather than surface details"}, {"w": "underestimate", "d": "to estimate something as being less than it actually is"}, {"w": "transatlantic", "d": "crossing or relating to the Atlantic Ocean, especially between Europe and the Americas"}, {"w": "framed", "d": "presented or described in a particular way to shape how it is understood"}], "tf": [{"s": "The carbon budget refers to the total emissions allowed to keep warming within 2 degrees Celsius.", "ans": false, "just": "The article states the target is '1.5 degrees Celsius', not 2 degrees."}, {"s": "According to Oxfam, the wealthiest 1% exhaust their annual carbon budget within the first ten days of the year.", "ans": true, "just": "This is stated directly in both the headline and the first paragraph."}, {"s": "The article suggests that the populations most responsible for emissions are the ones suffering most from climate change.", "ans": false, "just": "The article says it is 'the poorest and most vulnerable populations \u2014 least responsible for emissions \u2014 who bear the worst consequences'."}, {"s": "A single transatlantic private jet flight emits more CO2 than an average person in a low-income country produces in a year.", "ans": true, "just": "The article states this directly as an example of high-impact lifestyle choices."}, {"s": "The article argues that the carbon footprint of the ultra-wealthy is accurately captured by traditional measurement methods.", "ans": false, "just": "The article says 'traditional measures of individual carbon footprints significantly underestimate the climate impact of the ultra-wealthy' due to investment emissions."}, {"s": "The article describes a shift in how climate change is discussed \u2014 from a technical issue to one of global equity.", "ans": true, "just": "The article states that climate change 'is now widely discussed as a question of global equity \u2014 who caused it, who suffers most, and who must bear the greatest responsibility'."}], "opinion": [{"prompt": "The article argues that voluntary lifestyle changes by the wealthy are insufficient and structural policies such as wealth taxes are needed. Do you agree?", "tip": "Use <strong>Cleft Sentences</strong>: 'It is structural inequality, not individual behaviour, that lies at the heart of this problem.' / 'What the article suggests is that voluntary action is simply not enough.' Use <strong>Hedging</strong>: 'It would appear that...', 'The evidence tends to suggest that...'"}, {"prompt": "The debate around climate justice asks: who caused climate change, and who must bear the greatest responsibility for solving it? How would you answer these questions?", "tip": "Use <strong>Inversion</strong>: 'Not only do the wealthiest nations emit the most carbon, but they also have the greatest capacity to finance solutions.' / 'Rarely has the link between wealth and environmental destruction been more clearly documented.' Use <strong>Advanced Passive</strong>: 'It has been argued that...', 'It is widely believed that...'"}, {"prompt": "Had wealth taxes and frequent flyer levies been introduced globally ten years ago, do you think the relationship between wealth and carbon emissions would be different today?", "tip": "Use the <strong>Third Conditional</strong>: 'If these policies had been introduced a decade ago, the carbon footprint of the ultra-wealthy might have been significantly reduced.' Use <strong>Subjunctive</strong>: 'It is essential that governments now require that the wealthiest individuals be held accountable for their investment emissions.'"}]}, {"topic": "Work & Technology", "level": "B2.1 Advanced", "source": "Adapted from AI Social Media & PrometAI Blog, 2026", "title": "The Synthetic Influencer: A New Kind of Celebrity", "intro": "Virtual influencers \u2014 computer-generated characters that look and behave like real humans \u2014 are now a multi-billion dollar industry. As AI makes them increasingly convincing, the ethical and commercial questions they raise are becoming impossible to ignore.", "body": ["The market for synthetic influencers \u2014 digitally created personas used for brand promotion on social media \u2014 reached 6.9 billion dollars in 2026. These characters, which are indistinguishable from real human influencers to many users, hold real brand contracts, amass millions of followers, and generate revenue comparable to their human counterparts.", "The technology behind synthetic influencers has advanced rapidly. Using generative AI, companies can now create photorealistic avatars that post content, respond to comments, and even conduct interviews \u2014 all without any human behind the persona. Some brands prefer synthetic influencers precisely because they are controllable: they never make controversial statements, never age, and can be adjusted to fit any market or demographic.", "Regulation has struggled to keep pace. In the United States, the Federal Trade Commission requires that virtual influencers disclose their non-human nature. In the European Union, the Digital Services Act imposes similar transparency obligations. However, a 2025 audit found that 44% of virtual influencer posts on Instagram lacked proper disclosure language \u2014 meaning that nearly half of users may have been unaware they were interacting with a machine.", "The implications for human influencers and content creators are significant. If a brand can create a perfect digital spokesperson for a fraction of the cost of a human contract, there is a real risk that creative and commercial work in this space becomes increasingly automated. Some creators have begun to argue for stronger copyright protections and minimum income guarantees.", "It would seem that the synthetic influencer encapsulates a broader question facing society: as AI becomes capable of producing content that is indistinguishable from human creativity, what does authorship mean \u2014 and does it still matter?"], "vocab": [{"w": "synthetic", "d": "made artificially by chemical or digital processes; not natural"}, {"w": "persona", "d": "a character or identity adopted in a particular context"}, {"w": "indistinguishable", "d": "impossible to tell apart; appearing identical to something else"}, {"w": "generative AI", "d": "AI that can create new content such as images, text or video"}, {"w": "demographic", "d": "a particular group within a population, defined by age, income etc."}, {"w": "disclosure", "d": "the action of making something known; revealing information"}, {"w": "transparency", "d": "the quality of being open and honest; not hiding information"}, {"w": "encapsulate", "d": "to express or represent something in a brief or concise way"}, {"w": "authorship", "d": "the identity of the creator of a piece of work"}, {"w": "amass", "d": "to gather or accumulate a large amount of something over time"}, {"w": "avatar", "d": "a digital representation of a person or character"}, {"w": "audit", "d": "an official examination of accounts, processes or compliance"}], "tf": [{"s": "The synthetic influencer market was worth 6.9 billion dollars in 2026.", "ans": true, "just": "The article states the market 'reached 6.9 billion dollars in 2026'."}, {"s": "Brands prefer synthetic influencers because they are cheaper and more spontaneous than human influencers.", "ans": false, "just": "The article says brands prefer them because they are 'controllable' \u2014 never controversial, never ageing \u2014 not because of spontaneity."}, {"s": "The 2025 audit found that the majority of virtual influencer posts included proper disclosure language.", "ans": false, "just": "The article says '44% lacked proper disclosure language' \u2014 meaning more than four in ten posts were non-compliant, not a minority."}, {"s": "The EU's Digital Services Act requires synthetic influencers to disclose their non-human nature.", "ans": true, "just": "The article states the Digital Services Act 'imposes similar transparency obligations' to the US requirements."}, {"s": "Some human content creators have begun to argue for copyright protections and minimum income guarantees.", "ans": true, "just": "The article states 'some creators have begun to argue for stronger copyright protections and minimum income guarantees'."}, {"s": "The article concludes that the question of authorship in the age of AI has already been resolved.", "ans": false, "just": "The article poses authorship as 'a broader question facing society' \u2014 it is unresolved, not settled."}], "opinion": [{"prompt": "The article asks: as AI produces content indistinguishable from human creativity, does authorship still matter? How would you answer this question?", "tip": "Use <strong>Cleft Sentences</strong>: 'What is at stake is not just copyright but the very definition of human creativity.' Use <strong>Advanced Modals</strong>: 'Authorship can't have lost its value entirely, because...' / 'Society must have known this question would arise eventually.'"}, {"prompt": "The article reveals that 44% of synthetic influencer posts lack proper disclosure. Do you think stricter regulation is the answer, or does responsibility lie with the platforms?", "tip": "Use <strong>Inversion</strong>: 'Not only are consumers being misled, but they are also being commercially exploited.' Use <strong>Hedging</strong>: 'It would appear that self-regulation has proved insufficient.' / 'The evidence tends to suggest that...' Use <strong>Subjunctive</strong>: 'It is essential that platforms be required to...'"}, {"prompt": "Had strict disclosure requirements been enforced globally from the moment synthetic influencers appeared, do you think public trust in social media would be higher today?", "tip": "Use the <strong>Third Conditional</strong>: 'If disclosure rules had been enforced from the start, consumers would not have been misled on such a scale.' Use <strong>Mixed Conditional</strong>: 'If those early regulations had been stronger, the synthetic influencer market might look very different now.'"}]}];
+var state = A.map(function(){ return {answered:[], correct:0, choices:{}}; });
+var curA=0, curV=0, curTF=0, curOp=0;
+
+function renderArticle(idx){
+  var a=A[idx];
+  document.getElementById('articleDisplay').innerHTML=
+    '<div class="article-meta">'+
+    '<span class="tag tag-topic">'+a.topic+'</span>'+
+    '<span class="tag tag-level">'+a.level+'</span>'+
+    '<span class="tag tag-source">'+a.source+'</span></div>'+
+    '<div class="article-title">'+a.title+'</div>'+
+    '<div class="article-intro">'+a.intro+'</div>'+
+    '<div class="article-body">'+a.body.map(function(p){return '<p>'+p+'</p>';}).join('')+'</div>'+
+    '<div class="source-note">Adapted and simplified from authentic sources for language learning at '+a.level+'.</div>';
+}
+window.selectArticle=function(i,b){
+  curA=i;
+  document.querySelectorAll('#read .article-pill').forEach(function(x){x.classList.remove('active');});
+  b.classList.add('active'); renderArticle(i);
+};
+
+function renderVocab(idx){
+  document.getElementById('vocabDisplay').innerHTML=A[idx].vocab.map(function(v){
+    return '<div class="gloss-item"><div class="gloss-word">'+v.w+'</div><div class="gloss-def">'+v.d+'</div></div>';
+  }).join('');
+}
+window.selectVocab=function(i,b){
+  curV=i;
+  document.querySelectorAll('#vocab .article-pill').forEach(function(x){x.classList.remove('active');});
+  b.classList.add('active'); renderVocab(i);
+};
+
+function renderTF(idx){
+  var tf=A[idx].tf, s=state[idx];
+  document.getElementById('tfScore').textContent=s.correct+' / '+tf.length;
+  document.getElementById('tfFill').style.width=(s.correct/tf.length*100)+'%';
+  document.getElementById('tfDisplay').innerHTML=tf.map(function(item,i){
+    var done=s.answered.indexOf(i)!==-1;
+    var chosen=s.choices[i];
+    var wasRight=done&&((item.ans===true&&chosen==='true')||(item.ans===false&&chosen==='false'));
+    var tClass=done?(item.ans===true?' correct':(chosen==='true'?' wrong':'')):'';
+    var fClass=done?(item.ans===false?' correct':(chosen==='false'?' wrong':'')):'';
+    var dis=done?' disabled':'';
+    var fb=done?('<div class="tf-feedback '+(wasRight?'ok':'no')+'">'+(wasRight?'Correct.':'Incorrect.')+'</div><div class="tf-justification">'+item.just+'</div>'):'<div class="tf-feedback"></div>';
+    return '<div class="tf-item">'+
+      '<div class="tf-statement">'+(i+1)+'. '+item.s+'</div>'+
+      '<div class="tf-btns">'+
+      '<button class="tf-btn true-btn'+tClass+dis+'" data-art="'+idx+'" data-q="'+i+'" data-ans="true">True</button>'+
+      '<button class="tf-btn false-btn'+fClass+dis+'" data-art="'+idx+'" data-q="'+i+'" data-ans="false">False</button>'+
+      '</div>'+fb+'</div>';
+  }).join('');
+
+  document.getElementById('tfDisplay').addEventListener('click', handleTFClick);
+}
+function handleTFClick(e){
+  var btn=e.target.closest('.tf-btn');
+  if(!btn||btn.classList.contains('disabled'))return;
+  var art=parseInt(btn.dataset.art), q=parseInt(btn.dataset.q), chosen=btn.dataset.ans;
+  var s=state[art];
+  if(s.answered.indexOf(q)!==-1)return;
+  s.answered.push(q); s.choices[q]=chosen;
+  if((A[art].tf[q].ans===true&&chosen==='true')||(A[art].tf[q].ans===false&&chosen==='false'))s.correct++;
+  renderTF(art); updateProgress();
+}
+window.selectTF=function(i,b){
+  curTF=i;
+  document.querySelectorAll('#truefalse .article-pill').forEach(function(x){x.classList.remove('active');});
+  b.classList.add('active'); renderTF(i);
+};
+window.resetTF=function(){
+  state[curTF]={answered:[],correct:0,choices:{}};
+  renderTF(curTF); updateProgress();
+};
+
+function renderOpinion(idx){
+  var a=A[idx];
+  document.getElementById('opinionDisplay').innerHTML=
+    '<div style="background:var(--light);border-radius:7px;padding:.7rem 1rem;margin-bottom:1rem;font-size:.83rem;color:var(--accent);font-weight:600;">'+a.title+'</div>'+
+    a.opinion.map(function(q,i){
+      return '<div class="opinion-prompt"><strong>Question '+(i+1)+':</strong> '+q.prompt+'</div>'+
+        '<div class="grammar-tip"><strong>Grammar focus:</strong> '+q.tip+'</div>'+
+        '<textarea class="writing-area" id="op_'+idx+'_'+i+'" placeholder="Write your answer here..."></textarea>'+
+        '<div class="char-count" id="opc_'+idx+'_'+i+'">0 characters</div>';
+    }).join('<div style="height:.75rem"></div>');
+  A[idx].opinion.forEach(function(q,i){
+    var ta=document.getElementById('op_'+idx+'_'+i);
+    if(ta)ta.addEventListener('input',function(){
+      document.getElementById('opc_'+idx+'_'+i).textContent=this.value.length+' characters';
+    });
+  });
+}
+window.selectOpinion=function(i,b){
+  curOp=i;
+  document.querySelectorAll('#opinion .article-pill').forEach(function(x){x.classList.remove('active');});
+  b.classList.add('active'); renderOpinion(i);
+};
+
+function updateProgress(){
+  var total=state.reduce(function(acc,s){return acc+s.correct;},0);
+  document.getElementById('bigScore').textContent=total;
+  document.getElementById('progressDetail').innerHTML=A.map(function(a,i){
+    var s=state[i];
+    var txt=s.answered.length===0?'Not started yet':s.correct+' / '+a.tf.length+' correct ('+s.answered.length+' answered)';
+    return '<div class="prog-row"><strong>'+a.title+'</strong> — '+txt+'</div>';
+  }).join('');
+}
+
+window.Tab=function(id,btn){
+  document.querySelectorAll('section').forEach(function(s){s.classList.remove('active');});
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active');});
+  document.getElementById(id).classList.add('active'); btn.classList.add('active');
+};
+
+renderArticle(0); renderVocab(0); renderTF(0); renderOpinion(0); updateProgress();
+})();
+</script>
+
+</body>
+</html>
